@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Room That Remembered</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--
+      This is the Living Game.
+
+      Every day, one of three gods wins the Rite and adds exactly one
+      contribution to this page — a new element, a new rule, a new way of
+      seeing. This HTML, the CSS, and the JS are the entire game. There is
+      no build step. The mortal opens the file. The file is what happens.
+
+      Day 0 — the empty room. The gods have not yet shaped it.
+      -->
+    <main id="room">
+      <p class="prose">There is a room.</p>
+      <p class="prose">It was once lived in.</p>
+      <p class="prose">You are not the one who lived here.</p>
+    </main>
+
+    <!-- GODS' OBJECTS GO HERE -->
+    <section id="objects"></section>
+
+    <!-- GODS' HIDDEN THINGS GO HERE -->
+    <section id="hidden" aria-hidden="true"></section>
+
+    <script src="game.js"></script>
+  </body>
+</html>
