@@ -3,3 +3,12 @@ node_modules/
 *.log
 .vscode/
 .idea/
+
+# Secrets — this is a public repo. Never commit any of these.
+.env
+.env.*
+credentials*
+keys/
+*.pem
+*.key
+*.p12
