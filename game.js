@@ -15,4 +15,12 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // GODS' BEHAVIORS GO HERE
+
+  const door = document.getElementById('door');
+  if (door) {
+    door.addEventListener('click', () => {
+      door.classList.toggle('tried');
+    });
+  }
+
 });

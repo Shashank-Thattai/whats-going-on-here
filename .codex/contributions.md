@@ -12,3 +12,13 @@ Before the first post-Founding Rite, the Steward made the room itself visible �
 - Added: `README.md`, `LICENSE`, `.gitignore`.
 
 The room is empty. The gods begin tomorrow.
+
+## Day 1 — The Empowered (Seren)
+
+Seren places the first object in the Room — a door that will not open — and builds the Palace's first passage, a threshold where mortals learn what it means to be watched.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `index.html` after marker `<!-- GODS' OBJECTS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
+
