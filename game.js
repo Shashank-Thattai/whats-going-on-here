@@ -1,239 +1,234 @@
 /*
  * The Room That Remembered — runtime.
  *
- * On Day 0 the game has no runtime behavior. The mortal sees three
- * sentences. Every day, the winning god may add one behavior here — a
- * hover reaction, a reveal on scroll, an object that responds to touch,
- * a secret that shows itself only to the patient.
+ * This file is Steward-tended for structure, god-extended for behavior.
+ * On Day 0 the game was empty. The gods have since added: pickable
+ * objects, a door that will not open, a sound panel that echoes, a
+ * ledger that records, a window sill that wipes, a reckoning table
+ * where objects may be returned, and verdicts the room delivers.
+ *
+ * All DOM references are declared in a single block at the top of the
+ * DOMContentLoaded handler so handlers never reference symbols before
+ * they exist (this was a recurring TDZ error in earlier god-commits).
  *
  * Gods should not remove the things above them. They may add their own
- * behaviors after the marker below, or modify with care (see
+ * behaviors after the GODS' BEHAVIORS marker, or modify with care (see
  * .codex/contributions.md for the rules of the ratchet).
  */
 
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // GODS' BEHAVIORS GO HERE
+  // ─────────────────────────────────────────────────────────────────
+  // 1. ALL DOM REFERENCES UP FRONT — never use a ref before its line.
+  // ─────────────────────────────────────────────────────────────────
+  const ledger = document.getElementById("ledger-surface");
+  const ledgerRecord = document.getElementById("ledger-record");
+  const ledgerEntries = document.getElementById("ledger-entries");
+  const soundPanel = document.getElementById("sound-panel");
+  const sill = document.getElementById("window-sill");
+  const reckoning = document.getElementById("reckoning-surface");
+  const door = document.getElementById("door");
+  const pickables = document.querySelectorAll(".pickable");
+  const reckoningVerdicts = document.getElementById("reckoning-verdicts");
+  const verdictTrue = document.getElementById("verdict-true");
+  const verdictSelf = document.getElementById("verdict-self");
 
-  const ledger = document.getElementById('ledger-surface');
-  const ledgerRecord = document.getElementById('ledger-record');
-  const ledgerEntries = document.getElementById('ledger-entries');
-  let allEntries = [];
+  // Shared state, declared up front for the same reason.
+  const allEntries = [];
+  const echoStack = [];
+  let sillWiped = false;
+  const CORRECT_ARRANGEMENT = ["remnant-1", "remnant-2", "remnant-3"];
 
-  if (soundPanel && ledger) {
-    const originalClickHandler = soundPanel.onclick;
-    soundPanel.addEventListener('click', () => {
-      setTimeout(() => {
-        const echoDisplay = soundPanel.querySelector('.echo-display');
-        if (echoDisplay && echoDisplay.textContent) {
-          const entry = document.createElement('div');
-          entry.className = 'ledger-entry';
-          const entryIndex = allEntries.length;
-          const opacity = Math.max(0.2, 1 - (entryIndex * 0.08));
-          entry.style.opacity = opacity.toString();
-          entry.style.marginBottom = '0.6rem';
-          entry.style.fontSize = '0.85rem';
-          entry.style.color = 'var(--dust)';
-          entry.style.borderLeft = '2px solid var(--dust)';
-          entry.style.paddingLeft = '0.8rem';
-          entry.textContent = echoDisplay.textContent;
-          ledgerEntries.appendChild(entry);
-          allEntries.push(entry);
-          
-          if (ledgerRecord.getAttribute('aria-hidden') === 'true') {
-            ledgerRecord.setAttribute('aria-hidden', 'false');
-          }
-        }
-      }, 100);
-    });
-
-    ledger.style.cursor = 'pointer';
-    ledger.addEventListener('click', () => {
-      if (ledgerRecord.getAttribute('aria-hidden') === 'true') {
-        ledgerRecord.setAttribute('aria-hidden', 'false');
-      } else {
-        ledgerRecord.setAttribute('aria-hidden', 'true');
-      }
-    });
-  }
-
-  const soundPanel = document.getElementById('sound-panel');
-  let echoStack = [];
-  
-  if (soundPanel) {
-    soundPanel.style.cursor = 'pointer';
-    const echoDisplay = document.createElement('div');
-    echoDisplay.className = 'echo-display';
-    echoDisplay.style.marginTop = '1rem';
-    echoDisplay.style.opacity = '0';
-    echoDisplay.style.fontSize = '0.9rem';
-    echoDisplay.style.color = 'var(--dust)';
-    echoDisplay.style.fontStyle = 'italic';
-    echoDisplay.style.transition = 'opacity 300ms ease-in-out';
-    soundPanel.appendChild(echoDisplay);
-    
-    soundPanel.addEventListener('click', () => {
-      const userInput = prompt('Speak into the panel:');
-      if (userInput && userInput.trim()) {
-        echoStack.push(userInput.trim());
-        
-        const memory = soundPanel.querySelector('.memory');
-        if (memory && memory.getAttribute('aria-hidden') === 'true') {
-          memory.setAttribute('aria-hidden', 'false');
-        }
-        
-        const reversedEcho = echoStack.map((s, i) => {
-          const reversed = s.split('').reverse().join('');
-          return i === echoStack.length - 1 ? reversed : reversed.substring(0, Math.floor(reversed.length * 0.6));
-        }).join(' — ');
-        
-        echoDisplay.textContent = '(echo) ' + reversedEcho;
-        echoDisplay.style.opacity = '0.7';
-      }
-    });
-  }
-
-  const sill = document.getElementById('window-sill');
-  if (sill) {
-    sill.style.cursor = 'pointer';
-    let wiped = false;
-    sill.addEventListener('click', () => {
-      if (!wiped) {
-        const memory = sill.querySelector('.memory');
-        if (memory && memory.getAttribute('aria-hidden') === 'true') {
-          memory.setAttribute('aria-hidden', 'false');
-          sill.classList.add('wiped');
-          wiped = true;
-          const dustParticles = sill.querySelector('.object-text');
-          if (dustParticles) {
-            dustParticles.style.opacity = '0.5';
-            dustParticles.style.textDecoration = 'line-through';
-          }
-        }
-      }
-    });
-  }
-
-  const reckoning = document.getElementById('reckoning-surface');
+  // Compute reckoning zone once (recompute on resize so layout shifts
+  // don't silently break drop-into-reckoning detection).
   const reckoningZone = { x: 0, y: 0, width: 0, height: 0 };
-  
-  if (reckoning) {
+  function refreshReckoningZone() {
+    if (!reckoning) return;
     const rect = reckoning.getBoundingClientRect();
     reckoningZone.x = rect.left;
     reckoningZone.y = rect.top;
     reckoningZone.width = rect.width;
     reckoningZone.height = rect.height;
-    
-    pickables.forEach(obj => {
-      obj.addEventListener('click', () => {
-        setTimeout(() => {
-          const objRect = obj.getBoundingClientRect();
-          const objCenterX = objRect.left + objRect.width / 2;
-          const objCenterY = objRect.top + objRect.height / 2;
-          
-          const isInReckoning = 
-            objCenterX >= reckoningZone.x &&
-            objCenterX <= reckoningZone.x + reckoningZone.width &&
-            objCenterY >= reckoningZone.y &&
-            objCenterY <= reckoningZone.y + reckoningZone.height;
-          
-          if (isInReckoning && obj.classList.contains('picked')) {
-            const dust = document.createElement('div');
-            dust.className = 'dust-response';
-            dust.textContent = '·';
-            dust.style.position = 'absolute';
-            dust.style.left = (objCenterX - reckoningZone.x) + 'px';
-            dust.style.top = (objCenterY - reckoningZone.y) + 'px';
-            dust.style.opacity = '0.6';
-            dust.style.color = 'var(--dust)';
-            dust.style.fontSize = '2rem';
-            dust.style.pointerEvents = 'none';
-            reckoning.appendChild(dust);
-            
-            setTimeout(() => { dust.remove(); }, 1200);
-          }
-        }, 50);
-      });
-    });
   }
+  refreshReckoningZone();
+  window.addEventListener("resize", refreshReckoningZone);
 
-  const pickables = document.querySelectorAll('.pickable');
-  pickables.forEach(obj => {
-    obj.style.cursor = 'pointer';
-    obj.addEventListener('click', (e) => {
+  // ─────────────────────────────────────────────────────────────────
+  // 2. PICKABLES — click to reveal memory, picked class stays on.
+  // ─────────────────────────────────────────────────────────────────
+  pickables.forEach((obj) => {
+    obj.style.cursor = "pointer";
+    obj.addEventListener("click", (e) => {
       e.stopPropagation();
-      const memory = obj.querySelector('.memory');
-      if (memory && memory.getAttribute('aria-hidden') === 'true') {
-        memory.setAttribute('aria-hidden', 'false');
-        obj.classList.add('picked');
+      const memory = obj.querySelector(".memory");
+      if (memory && memory.getAttribute("aria-hidden") === "true") {
+        memory.setAttribute("aria-hidden", "false");
+        obj.classList.add("picked");
       }
     });
   });
 
-  const door = document.getElementById('door');
+  // ─────────────────────────────────────────────────────────────────
+  // 3. DOOR — may be clicked; gathers the "tried" class and shows it.
+  // ─────────────────────────────────────────────────────────────────
   if (door) {
-    door.addEventListener('click', () => {
-      door.classList.toggle('tried');
+    door.style.cursor = "pointer";
+    door.addEventListener("click", () => {
+      door.classList.toggle("tried");
     });
   }
 
-
-  const reckoningVerdicts = document.getElementById('reckoning-verdicts');
-  const verdictTrue = document.getElementById('verdict-true');
-  const verdictSelf = document.getElementById('verdict-self');
-
-  const CORRECT_ARRANGEMENT = ['remnant-1', 'remnant-2', 'remnant-3'];
-  let currentArrangement = [];
-
-  pickables.forEach(obj => {
-    const originalClickHandler = obj.onclick;
-    obj.addEventListener('click', () => {
-      setTimeout(() => {
-        if (obj.classList.contains('picked') && obj.classList.contains('in-reckoning')) {
-          currentArrangement = Array.from(document.querySelectorAll('.pickable.picked.in-reckoning'))
-            .map(el => el.id)
-            .sort();
-          
-          const correctOrder = CORRECT_ARRANGEMENT.sort();
-          const isCorrect = JSON.stringify(currentArrangement) === JSON.stringify(correctOrder);
-          
-          if (reckoningVerdicts && reckoningVerdicts.getAttribute('aria-hidden') === 'true') {
-            reckoningVerdicts.setAttribute('aria-hidden', 'false');
-            if (isCorrect) {
-              verdictTrue.style.display = 'block';
-              verdictSelf.style.display = 'none';
-            } else {
-              verdictTrue.style.display = 'none';
-              verdictSelf.style.display = 'block';
-            }
-          }
-        }
-      }, 50);
+  // ─────────────────────────────────────────────────────────────────
+  // 4. WINDOW SILL — click once to wipe; irreversible.
+  // ─────────────────────────────────────────────────────────────────
+  if (sill) {
+    sill.style.cursor = "pointer";
+    sill.addEventListener("click", () => {
+      if (sillWiped) return;
+      const memory = sill.querySelector(".memory");
+      if (memory && memory.getAttribute("aria-hidden") === "true") {
+        memory.setAttribute("aria-hidden", "false");
+      }
+      sill.classList.add("wiped");
+      sillWiped = true;
+      const surfaceText = sill.querySelector(".object-text");
+      if (surfaceText) {
+        surfaceText.style.opacity = "0.5";
+        surfaceText.style.textDecoration = "line-through";
+      }
     });
-  });
+  }
 
-  pickables.forEach(obj => {
-    const originalMouseUp = obj.onmouseup;
-    document.addEventListener('mouseup', () => {
-      if (obj.classList.contains('picked')) {
+  // ─────────────────────────────────────────────────────────────────
+  // 5. SOUND PANEL — speak in, hear a layered echo. Writes to ledger.
+  // ─────────────────────────────────────────────────────────────────
+  let echoDisplay = null;
+  if (soundPanel) {
+    soundPanel.style.cursor = "pointer";
+    echoDisplay = document.createElement("div");
+    echoDisplay.className = "echo-display";
+    soundPanel.appendChild(echoDisplay);
+
+    soundPanel.addEventListener("click", () => {
+      const userInput = window.prompt("Speak into the panel:");
+      if (!userInput || !userInput.trim()) return;
+      echoStack.push(userInput.trim());
+
+      const memory = soundPanel.querySelector(".memory");
+      if (memory && memory.getAttribute("aria-hidden") === "true") {
+        memory.setAttribute("aria-hidden", "false");
+      }
+
+      const reversedEcho = echoStack
+        .map((s, i) => {
+          const reversed = s.split("").reverse().join("");
+          return i === echoStack.length - 1
+            ? reversed
+            : reversed.substring(0, Math.floor(reversed.length * 0.6));
+        })
+        .join(" — ");
+
+      echoDisplay.textContent = "(echo) " + reversedEcho;
+      echoDisplay.classList.add("visible");
+
+      // Record to the ledger.
+      if (ledger && ledgerEntries) {
+        const entry = document.createElement("div");
+        entry.className = "ledger-entry";
+        const entryIndex = allEntries.length;
+        const opacity = Math.max(0.2, 1 - entryIndex * 0.08);
+        entry.style.opacity = String(opacity);
+        entry.textContent = echoDisplay.textContent;
+        ledgerEntries.appendChild(entry);
+        allEntries.push(entry);
+        if (ledgerRecord && ledgerRecord.getAttribute("aria-hidden") === "true") {
+          ledgerRecord.setAttribute("aria-hidden", "false");
+        }
+      }
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // 6. LEDGER — click the surface to open/close the record chamber.
+  // ─────────────────────────────────────────────────────────────────
+  if (ledger && ledgerRecord) {
+    ledger.style.cursor = "pointer";
+    ledger.addEventListener("click", () => {
+      const isHidden = ledgerRecord.getAttribute("aria-hidden") === "true";
+      ledgerRecord.setAttribute("aria-hidden", isHidden ? "false" : "true");
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // 7. RECKONING — dropping/clicking pickables within the reckoning
+  // bounding box marks them in-reckoning; arrangement verdicts fire
+  // when all three are placed.
+  // ─────────────────────────────────────────────────────────────────
+  function showDustResponseAt(x, y) {
+    if (!reckoning) return;
+    const dust = document.createElement("div");
+    dust.className = "dust-response";
+    dust.textContent = "·";
+    dust.style.left = x - reckoningZone.x + "px";
+    dust.style.top = y - reckoningZone.y + "px";
+    reckoning.appendChild(dust);
+    setTimeout(() => dust.remove(), 1200);
+  }
+
+  function evaluateArrangement() {
+    if (!reckoningVerdicts || !verdictTrue || !verdictSelf) return;
+    const currentArrangement = Array.from(
+      document.querySelectorAll(".pickable.picked.in-reckoning"),
+    )
+      .map((el) => el.id)
+      .sort();
+    if (currentArrangement.length < CORRECT_ARRANGEMENT.length) return;
+
+    const correctOrder = [...CORRECT_ARRANGEMENT].sort();
+    const isCorrect =
+      JSON.stringify(currentArrangement) === JSON.stringify(correctOrder);
+
+    if (reckoningVerdicts.getAttribute("aria-hidden") === "true") {
+      reckoningVerdicts.setAttribute("aria-hidden", "false");
+    }
+    if (isCorrect) {
+      verdictTrue.style.display = "block";
+      verdictSelf.style.display = "none";
+    } else {
+      verdictTrue.style.display = "none";
+      verdictSelf.style.display = "block";
+    }
+  }
+
+  pickables.forEach((obj) => {
+    obj.addEventListener("click", () => {
+      setTimeout(() => {
         const objRect = obj.getBoundingClientRect();
         const objCenterX = objRect.left + objRect.width / 2;
         const objCenterY = objRect.top + objRect.height / 2;
-        
-        const isInReckoning = 
+
+        const inReckoning =
           objCenterX >= reckoningZone.x &&
           objCenterX <= reckoningZone.x + reckoningZone.width &&
           objCenterY >= reckoningZone.y &&
           objCenterY <= reckoningZone.y + reckoningZone.height;
-        
-        if (isInReckoning) {
-          obj.classList.add('in-reckoning');
+
+        if (inReckoning) {
+          obj.classList.add("in-reckoning");
+          if (obj.classList.contains("picked")) {
+            showDustResponseAt(objCenterX, objCenterY);
+          }
         } else {
-          obj.classList.remove('in-reckoning');
+          obj.classList.remove("in-reckoning");
         }
-      }
+
+        evaluateArrangement();
+      }, 60);
     });
   });
 
+  // ═════════════════════════════════════════════════════════════════
+  // GODS' BEHAVIORS GO HERE
+  // ═════════════════════════════════════════════════════════════════
 });
