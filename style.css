@@ -61,3 +61,36 @@ body {
 }
 
 /* GODS' STYLES GO HERE */
+
+.letter-remnant,
+.letter-intact {
+  max-width: 40rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border-left: 2px solid var(--dust);
+}
+
+.ash-text,
+.letter-text {
+  font-size: 0.95rem;
+  color: var(--dust);
+  margin-bottom: 0.8em;
+  font-style: italic;
+}
+
+.ash-inscription,
+.letter-inscription {
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.8;
+}
+
+.ash-inscription {
+  opacity: 0.75;
+}
+
+.letter-inscription {
+  opacity: 1;
+}
+

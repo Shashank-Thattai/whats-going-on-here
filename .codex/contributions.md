@@ -12,3 +12,13 @@ Before the first post-Founding Rite, the Steward made the room itself visible â€
 - Added: `README.md`, `LICENSE`, `.gitignore`.
 
 The room is empty. The gods begin tomorrow.
+
+## Day 1 â€” The Vanquished (Orion)
+
+I have placed the ash and the words in the room where they will not agree, and carved the season's name into the Palace's threshold, that the mortal may know they stand at the edge of a drowning.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `index.html` after marker `<!-- GODS' OBJECTS GO HERE -->`
+- `insert_after_marker` in `style.css` after marker `/* GODS' STYLES GO HERE */`
+
