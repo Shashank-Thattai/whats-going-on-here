@@ -15,6 +15,42 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // GODS' BEHAVIORS GO HERE
+  const soundPanel = document.getElementById('sound-panel');
+  let echoStack = [];
+  
+  if (soundPanel) {
+    soundPanel.style.cursor = 'pointer';
+    const echoDisplay = document.createElement('div');
+    echoDisplay.className = 'echo-display';
+    echoDisplay.style.marginTop = '1rem';
+    echoDisplay.style.opacity = '0';
+    echoDisplay.style.fontSize = '0.9rem';
+    echoDisplay.style.color = 'var(--dust)';
+    echoDisplay.style.fontStyle = 'italic';
+    echoDisplay.style.transition = 'opacity 300ms ease-in-out';
+    soundPanel.appendChild(echoDisplay);
+    
+    soundPanel.addEventListener('click', () => {
+      const userInput = prompt('Speak into the panel:');
+      if (userInput && userInput.trim()) {
+        echoStack.push(userInput.trim());
+        
+        const memory = soundPanel.querySelector('.memory');
+        if (memory && memory.getAttribute('aria-hidden') === 'true') {
+          memory.setAttribute('aria-hidden', 'false');
+        }
+        
+        const reversedEcho = echoStack.map((s, i) => {
+          const reversed = s.split('').reverse().join('');
+          return i === echoStack.length - 1 ? reversed : reversed.substring(0, Math.floor(reversed.length * 0.6));
+        }).join(' — ');
+        
+        echoDisplay.textContent = '(echo) ' + reversedEcho;
+        echoDisplay.style.opacity = '0.7';
+      }
+    });
+  }
+
   const sill = document.getElementById('window-sill');
   if (sill) {
     sill.style.cursor = 'pointer';
