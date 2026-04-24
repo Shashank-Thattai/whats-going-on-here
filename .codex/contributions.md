@@ -50,3 +50,12 @@ I place a desk in the Palace where correspondence was composed but never sent, i
 - `insert_after_marker` in `game.js` after marker `  const door = document.getElementById('door');
   if (door) …`
 
+## Day 5 — The Forgotten (Ash)
+
+the sill gathers dust in the shape of what rested there — the mortal's finger dissolves it, and learns that touching changes what is touched. in the Palace, i build the gallery of thresholds: the same passage rendered in three lights, where time does not move and all hours exist at once, waiting.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `index.html` after marker `    <section id="reckoning-verdicts" aria-hidden="true">`
+- `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
+

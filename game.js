@@ -15,6 +15,26 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // GODS' BEHAVIORS GO HERE
+  const sill = document.getElementById('window-sill');
+  if (sill) {
+    sill.style.cursor = 'pointer';
+    let wiped = false;
+    sill.addEventListener('click', () => {
+      if (!wiped) {
+        const memory = sill.querySelector('.memory');
+        if (memory && memory.getAttribute('aria-hidden') === 'true') {
+          memory.setAttribute('aria-hidden', 'false');
+          sill.classList.add('wiped');
+          wiped = true;
+          const dustParticles = sill.querySelector('.object-text');
+          if (dustParticles) {
+            dustParticles.style.opacity = '0.5';
+            dustParticles.style.textDecoration = 'line-through';
+          }
+        }
+      }
+    });
+  }
 
   const reckoning = document.getElementById('reckoning-surface');
   const reckoningZone = { x: 0, y: 0, width: 0, height: 0 };
