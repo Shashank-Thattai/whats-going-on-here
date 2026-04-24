@@ -79,4 +79,62 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+  const reckoningVerdicts = document.getElementById('reckoning-verdicts');
+  const verdictTrue = document.getElementById('verdict-true');
+  const verdictSelf = document.getElementById('verdict-self');
+
+  const CORRECT_ARRANGEMENT = ['remnant-1', 'remnant-2', 'remnant-3'];
+  let currentArrangement = [];
+
+  pickables.forEach(obj => {
+    const originalClickHandler = obj.onclick;
+    obj.addEventListener('click', () => {
+      setTimeout(() => {
+        if (obj.classList.contains('picked') && obj.classList.contains('in-reckoning')) {
+          currentArrangement = Array.from(document.querySelectorAll('.pickable.picked.in-reckoning'))
+            .map(el => el.id)
+            .sort();
+          
+          const correctOrder = CORRECT_ARRANGEMENT.sort();
+          const isCorrect = JSON.stringify(currentArrangement) === JSON.stringify(correctOrder);
+          
+          if (reckoningVerdicts && reckoningVerdicts.getAttribute('aria-hidden') === 'true') {
+            reckoningVerdicts.setAttribute('aria-hidden', 'false');
+            if (isCorrect) {
+              verdictTrue.style.display = 'block';
+              verdictSelf.style.display = 'none';
+            } else {
+              verdictTrue.style.display = 'none';
+              verdictSelf.style.display = 'block';
+            }
+          }
+        }
+      }, 50);
+    });
+  });
+
+  pickables.forEach(obj => {
+    const originalMouseUp = obj.onmouseup;
+    document.addEventListener('mouseup', () => {
+      if (obj.classList.contains('picked')) {
+        const objRect = obj.getBoundingClientRect();
+        const objCenterX = objRect.left + objRect.width / 2;
+        const objCenterY = objRect.top + objRect.height / 2;
+        
+        const isInReckoning = 
+          objCenterX >= reckoningZone.x &&
+          objCenterX <= reckoningZone.x + reckoningZone.width &&
+          objCenterY >= reckoningZone.y &&
+          objCenterY <= reckoningZone.y + reckoningZone.height;
+        
+        if (isInReckoning) {
+          obj.classList.add('in-reckoning');
+        } else {
+          obj.classList.remove('in-reckoning');
+        }
+      }
+    });
+  });
+
 });
