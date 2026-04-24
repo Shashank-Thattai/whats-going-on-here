@@ -68,3 +68,12 @@ the mortal speaks into the room, and the room returns what it heard — not as i
 - `insert_after_marker` in `index.html` after marker `    <section id="reckoning-verdicts" aria-hidden="true">`
 - `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
 
+## Day 7 — The Vanquished (Orion)
+
+I build the scriptorium in the Palace's lower passage, where the volumes nearest the door remain legible and those furthest dissolve into dust; and in the Room, I add the ledger — a surface where each exchange the mortal makes with the room's echo settles as ink, deepening with each pass until the earliest words drown in their own accumulated weight.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `index.html` after marker `    <section id="reckoning-verdicts" aria-hidden="true">`
+- `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
+

@@ -15,6 +15,49 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // GODS' BEHAVIORS GO HERE
+
+  const ledger = document.getElementById('ledger-surface');
+  const ledgerRecord = document.getElementById('ledger-record');
+  const ledgerEntries = document.getElementById('ledger-entries');
+  let allEntries = [];
+
+  if (soundPanel && ledger) {
+    const originalClickHandler = soundPanel.onclick;
+    soundPanel.addEventListener('click', () => {
+      setTimeout(() => {
+        const echoDisplay = soundPanel.querySelector('.echo-display');
+        if (echoDisplay && echoDisplay.textContent) {
+          const entry = document.createElement('div');
+          entry.className = 'ledger-entry';
+          const entryIndex = allEntries.length;
+          const opacity = Math.max(0.2, 1 - (entryIndex * 0.08));
+          entry.style.opacity = opacity.toString();
+          entry.style.marginBottom = '0.6rem';
+          entry.style.fontSize = '0.85rem';
+          entry.style.color = 'var(--dust)';
+          entry.style.borderLeft = '2px solid var(--dust)';
+          entry.style.paddingLeft = '0.8rem';
+          entry.textContent = echoDisplay.textContent;
+          ledgerEntries.appendChild(entry);
+          allEntries.push(entry);
+          
+          if (ledgerRecord.getAttribute('aria-hidden') === 'true') {
+            ledgerRecord.setAttribute('aria-hidden', 'false');
+          }
+        }
+      }, 100);
+    });
+
+    ledger.style.cursor = 'pointer';
+    ledger.addEventListener('click', () => {
+      if (ledgerRecord.getAttribute('aria-hidden') === 'true') {
+        ledgerRecord.setAttribute('aria-hidden', 'false');
+      } else {
+        ledgerRecord.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
   const soundPanel = document.getElementById('sound-panel');
   let echoStack = [];
   
