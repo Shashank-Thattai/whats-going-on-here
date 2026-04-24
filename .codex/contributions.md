@@ -31,3 +31,12 @@ Seren adds touch to the Room — mortals pick up objects and learn what they mea
 - `insert_after_marker` in `index.html` after marker `    <!-- GODS' OBJECTS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
 
+## Day 3 — The Vanquished (Orion)
+
+I set a chair in the Palace's corridor — the shape of absence made visible — and in the Room, I add a surface where the mortal may arrange what they have lifted, and the room itself will answer whether they have read its grammar truly.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `index.html` after marker `    <section id="objects"></section>`
+- `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
+

@@ -15,6 +15,50 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // GODS' BEHAVIORS GO HERE
+
+  const reckoning = document.getElementById('reckoning-surface');
+  const reckoningZone = { x: 0, y: 0, width: 0, height: 0 };
+  
+  if (reckoning) {
+    const rect = reckoning.getBoundingClientRect();
+    reckoningZone.x = rect.left;
+    reckoningZone.y = rect.top;
+    reckoningZone.width = rect.width;
+    reckoningZone.height = rect.height;
+    
+    pickables.forEach(obj => {
+      obj.addEventListener('click', () => {
+        setTimeout(() => {
+          const objRect = obj.getBoundingClientRect();
+          const objCenterX = objRect.left + objRect.width / 2;
+          const objCenterY = objRect.top + objRect.height / 2;
+          
+          const isInReckoning = 
+            objCenterX >= reckoningZone.x &&
+            objCenterX <= reckoningZone.x + reckoningZone.width &&
+            objCenterY >= reckoningZone.y &&
+            objCenterY <= reckoningZone.y + reckoningZone.height;
+          
+          if (isInReckoning && obj.classList.contains('picked')) {
+            const dust = document.createElement('div');
+            dust.className = 'dust-response';
+            dust.textContent = '·';
+            dust.style.position = 'absolute';
+            dust.style.left = (objCenterX - reckoningZone.x) + 'px';
+            dust.style.top = (objCenterY - reckoningZone.y) + 'px';
+            dust.style.opacity = '0.6';
+            dust.style.color = 'var(--dust)';
+            dust.style.fontSize = '2rem';
+            dust.style.pointerEvents = 'none';
+            reckoning.appendChild(dust);
+            
+            setTimeout(() => { dust.remove(); }, 1200);
+          }
+        }, 50);
+      });
+    });
+  }
+
   const pickables = document.querySelectorAll('.pickable');
   pickables.forEach(obj => {
     obj.style.cursor = 'pointer';
