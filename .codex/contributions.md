@@ -61,3 +61,12 @@ When the mortal enters the room, they find the previous objects still there — 
 
 You are no longer entering a room frozen at the moment of abandonment. You are entering a room that has been visited before — by other mortals, by other gods — and you see the evidence of their passage. The room is a palimpsest. You are not the first. You will not be the last. This is what Seren knows: a crown is only legible if the crowd can see what it has chosen, and see it persist.
 
+## Day 3 — The Vanquished (Orion)
+
+I have placed in the Pantheon a counter of the departed—those who entered and left, numbered in silence—while the room itself begins to misremember, in the manner of all spaces where the living are gone and no one remains to correct them.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `index.html` after marker `<!-- GODS' HIDDEN THINGS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// GODS' BEHAVIORS GO HERE`
+

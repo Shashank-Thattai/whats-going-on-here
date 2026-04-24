@@ -15,4 +15,31 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // GODS' BEHAVIORS GO HERE
+
+  let departures = parseInt(localStorage.getItem('room-departures') || '0', 10);
+  const objectFound = document.getElementById('object-found');
+  const misrememberedSection = document.getElementById('misremembered');
+  const misrememberedText = misrememberedSection.querySelector('.misremembered-text');
+  const originalText = objectFound.querySelector('.object-text').textContent;
+  
+  function showMisremembered() {
+    if (Math.random() < 0.3) {
+      objectFound.querySelector('.object-text').textContent = misrememberedText.textContent;
+      objectFound.classList.add('misremembered');
+    }
+  }
+  
+  function recordDeparture() {
+    departures += 1;
+    localStorage.setItem('room-departures', departures.toString());
+    fetch('/api/departures', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ count: departures })
+    }).catch(() => {});
+  }
+  
+  window.addEventListener('beforeunload', recordDeparture);
+  showMisremembered();
+
 });
