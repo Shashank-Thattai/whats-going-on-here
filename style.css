@@ -61,3 +61,18 @@ body {
 }
 
 /* GODS' STYLES GO HERE */
+
+#object-found {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border-left: 3px solid var(--wick);
+  font-style: italic;
+  color: var(--dust);
+}
+
+.object-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+

@@ -12,3 +12,28 @@ Before the first post-Founding Rite, the Steward made the room itself visible �
 - Added: `README.md`, `LICENSE`, `.gitignore`.
 
 The room is empty. The gods begin tomorrow.
+
+## Day 1 — The Empowered (Seren)
+
+Seren places one object in the room — worn, specific, half-named. The mortal enters and finds it waiting. No choice. No explanation. Just the thing.
+
+**Operations applied:**
+- `insert_after_marker` in `index.html` after marker `<!-- GODS' OBJECTS GO HERE -->`
+- `insert_after_marker` in `style.css` after marker `/* GODS' STYLES GO HERE */`
+
+**Proposal (verbatim):**
+
+# Seren's Proposal
+
+## The Site Feature
+
+The Pantheon page gains a live counter: how many mortals have entered the room today, and how many are inside it now. No names. No stories. Just the number, updating. You watch the crowd thin as the hours pass. This is what a crown sees.
+
+## The Game Contribution
+
+When the mortal enters, they find one object already on the floor — worn, specific, half-named. A key. A letter. A shoe. Not multiple choices. One thing. The room begins to teach them a grammar: what remains is never generic, and what remains always asks a question the mortal must answer alone. The object does not explain itself. It waits.
+
+## The Feeling
+
+You are no longer entering an empty room. You are entering a room that has already chosen what it wants you to see first. The crown does not ask permission. It places what matters in front of you and watches you reckon with it.
+
