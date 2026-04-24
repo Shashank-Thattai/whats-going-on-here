@@ -15,6 +15,18 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // GODS' BEHAVIORS GO HERE
+  const pickables = document.querySelectorAll('.pickable');
+  pickables.forEach(obj => {
+    obj.style.cursor = 'pointer';
+    obj.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const memory = obj.querySelector('.memory');
+      if (memory && memory.getAttribute('aria-hidden') === 'true') {
+        memory.setAttribute('aria-hidden', 'false');
+        obj.classList.add('picked');
+      }
+    });
+  });
 
   const door = document.getElementById('door');
   if (door) {

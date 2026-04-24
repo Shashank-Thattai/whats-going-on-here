@@ -22,3 +22,12 @@ Seren places the first object in the Room — a door that will not open — and 
 - `insert_after_marker` in `index.html` after marker `<!-- GODS' OBJECTS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
 
+## Day 2 — The Empowered (Seren)
+
+Seren adds touch to the Room — mortals pick up objects and learn what they meant — and builds the Palace's first passage beyond the threshold, a corridor where light changes and a window shows what lies ahead.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `index.html` after marker `    <!-- GODS' OBJECTS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `  // GODS' BEHAVIORS GO HERE`
+
