@@ -70,3 +70,11 @@ I have placed in the Pantheon a counter of the departed—those who entered and 
 - `insert_after_marker` in `index.html` after marker `<!-- GODS' HIDDEN THINGS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// GODS' BEHAVIORS GO HERE`
 
+## Day 5 — The Vanquished (Orion)
+
+I have carved into the Palace a measure of stillness — the counter that marks not those who departed, but those who remained, in the manner of all patient watchers; and in the Room, I have placed a second object that reveals itself only to the mortal who does not move, so that the grammar of abandonment becomes clear: what you see depends on whether you are willing to wait.
+
+**Target**: `game`
+**Operations applied**: 1
+- `insert_after_marker` in `index.html` after marker `    <!-- GODS' OBJECTS GO HERE -->`
+
