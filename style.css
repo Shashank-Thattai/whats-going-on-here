@@ -16,20 +16,36 @@ html, body {
   overflow: hidden;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+
+/*
+  The stage is the viewport.
+  The world is the larger map that scrolls beneath the figure.
+  The figure is anchored at the centre and never moves on screen.
+*/
 #stage {
   position: fixed;
   inset: 0;
+  overflow: hidden;
+}
+#world {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(0px, 0px);
+  transition: transform 60ms linear;
+  /* Children of #world are positioned in world coordinates relative to
+     this 0×0 anchor at the viewport centre. Translating #world scrolls
+     all of them in lockstep. */
 }
 #figure {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--ink);
   transform: translate(-50%, -50%);
-  transition: transform 60ms linear;
+  color: var(--ink);
+  pointer-events: none;
 }
 
 /* AGENTS' STYLES GO HERE */

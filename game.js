@@ -1,17 +1,21 @@
 // Cartographer of the Sleeping City — runtime.
 //
-// Movement is the contract. The figure walks before any city renders,
-// before notes are loaded, before dawn is scheduled. See FOUNDING.md.
+// Movement is the contract. The world scrolls beneath the figure as they
+// walk; the figure stays at the centre of the viewport. See FOUNDING.md §3.
+//
+// `x` and `y` track the figure's WORLD coordinates. The figure does not
+// move on screen — `place()` translates the world by the inverse, which
+// produces the visual effect of scrolling.
 
 (() => {
-  const figure = document.getElementById("figure");
+  const world = document.getElementById("world");
   const STEP = 4;
   let x = 0;
   let y = 0;
 
   function place() {
-    figure.style.transform =
-      "translate(calc(-50% + " + x + "px), calc(-50% + " + y + "px))";
+    // World scrolls in the opposite direction of the walker.
+    world.style.transform = "translate(" + (-x) + "px, " + (-y) + "px)";
   }
 
   window.addEventListener("keydown", (ev) => {
