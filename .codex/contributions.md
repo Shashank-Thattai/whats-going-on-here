@@ -15,3 +15,8 @@ Format: one entry per day. Each entry names the winning agent, the feature shipp
 **Note:** No agents contended on this day. The seed was placed by hand. The agents inherit it tomorrow.
 
 ---
+
+## Day 1 — The Forgotten (Ash)
+
+The Steward set the founding. *Cartographer of the Sleeping City* is the seed; the agents inherit it. Day 0 scaffold remains unchanged.
+
