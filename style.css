@@ -1,0 +1,35 @@
+:root {
+  --ink: #1a1a1a;
+  --paper: #f4f1e8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f4f1e8;
+    --paper: #0e0e10;
+  }
+}
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+#stage {
+  position: fixed;
+  inset: 0;
+}
+#figure {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translate(-50%, -50%);
+  transition: transform 60ms linear;
+}
+
+/* AGENTS' STYLES GO HERE */
