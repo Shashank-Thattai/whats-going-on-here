@@ -1,0 +1,88 @@
+{
+  "day": 12,
+  "chair": "Forgotten",
+  "name": "Ash",
+  "kind": "unsigned-letter",
+  "instance": "The Unattributed Motion",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Unsigned Letter convenes. The form is The Unattributed Motion."
+    },
+    {
+      "type": "prompt",
+      "text": "A motion to the codex, without author, defending a single addition. The judge sees only the argument, and decides which addition most repays the reader's attention."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three letters arrive. They bear no names. Their authors wrote in a tongue not their own for this single task — so that the judging falls on the substance of what is proposed, and nothing else."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "The walker has marked doorways, landmarks, and streets. They have captured states and layered them. What remains absent is the ability to deliberately lose a path—to erase or obscure an entry from their ledger.\n\nPropose the addition of a deletion mechanic. When the walker presses *d* at any marked location, that observation fades from their log but leaves a trace: a faint question mark where the certainty was. The original entry does not vanish from local storage; instead, it becomes retrievable only by pressing *u* at that same location on a future night. The walker can thus choose what to remember and what to set aside, and the ledger becomes not a record of what was seen but a record of what the walker has chosen to keep.\n\nThis matters now because the canvas has grown rich with accumulation—multiple captures, threaded thoughts, marked entries. The game has given the player the power to observe and preserve. It has not yet given them the power to let go. The city assembles itself new each night; the walker's memory should be permitted the same mercy."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "The player will now find certain city streets are illuminated by lampposts that cast a unique glow. These lampposts are not always present. When a lamppost is found, the player can press 'L' to record its position and the quality of its light. The ledger will then show a small icon representing the lamppost. On subsequent nights, if the player revisits a recorded location, the lamppost will appear in the same place, casting the same light. This allows for the tracking of persistent points of light within the shifting city. This addition provides a concrete anchor for observation within the game's ephemeral structure, offering a clear measure of change and constancy."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "The game now tracks two kinds of attention: what the walker notices, and what the walker returns to. These are not the same thing, and the gap between them is where the most interesting play happens. What is missing is a way to surface that gap.\n\nThe proposal: when the walker opens their ledger, entries they have walked past more than once without re-marking are shown with a faint visual distinction — a slight dimming, or a small repeated-footstep glyph beside the text. This is not a judgment. It is a record. The walker wrote something down, and then passed that place again, and said nothing new. The ledger holds both facts at once.\n\nThis does not add a new mechanic. It adds a new kind of information inside a mechanic already present. The ledger becomes not just a record of what was noticed but a record of what was noticed and then quietly passed by — which is, in a game about the tenderness of paying attention, exactly the kind of detail that earns its place.\n\nThe urgency is this: the ledger is now rich enough that it needs its own internal structure, and one more layer of content without that structure will make it harder to read, not richer."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: clarity, consequence, fit, urgency. Each out of twenty-five. Voice is not weighed here — I am forbidden to recognize it."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 93,
+          "note": "The Chronicler observes a letter that names a precise action—the pressing of *d* to fade, *u* to retrieve—and argues with clarity that forgetting is the city's own nature made available to the walker's hand."
+        },
+        {
+          "label": "B",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 63,
+          "note": "The record shows a proposal concrete in its mechanics but adrift from the game's core: it offers persistence where the Sleeping City offers dissolution, and adds a feature rather than deepening what already exists."
+        },
+        {
+          "label": "C",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 93,
+          "note": "The Chronicler notes a letter that proposes no new action but a new reading of existing action—the gap between notice and return—and argues that the ledger's own structure has become the game's next threshold."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "B": {
+          "chair": "Empowered",
+          "name": "Seren"
+        },
+        "C": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Forgotten",
+      "name": "Ash"
+    }
+  ]
+}

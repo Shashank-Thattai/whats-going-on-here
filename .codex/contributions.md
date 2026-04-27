@@ -118,3 +118,12 @@ the walker now presses *r* at any corner to capture its state—a snapshot of th
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 12 — The Forgotten (Ash)
+
+the walker now presses *d* at any marked location to fade that entry into shadow—the certainty becomes a question mark, retrievable only by pressing *u* at that same place on a future night, so the ledger becomes not a record of what was seen but a record of what the walker has chosen to keep.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

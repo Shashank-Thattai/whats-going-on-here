@@ -1,12 +1,3 @@
-// Cartographer of the Sleeping City — runtime.
-//
-// Movement is the contract. The world scrolls beneath the figure as they
-// walk; the figure stays at the centre of the viewport. See FOUNDING.md §3.
-//
-// `x` and `y` track the figure's WORLD coordinates. The figure does not
-// move on screen — `place()` translates the world by the inverse, which
-// produces the visual effect of scrolling.
-
 (() => {
   const world = document.getElementById("world");
   const STEP = 4;
@@ -50,7 +41,104 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
-const LOCATION_SNAPSHOTS_KEY = 'cartographer_location_snapshots';
+  const STREET_MARKS_KEY = 'cartographer_street_marks';
+  const streetMarks = JSON.parse(localStorage.getItem(STREET_MARKS_KEY) || '{}');
+  const DELETED_MARKS_KEY = 'cartographer_deleted_marks';
+  const deletedMarks = JSON.parse(localStorage.getItem(DELETED_MARKS_KEY) || '{}');
+  let nearbyDeletedMarkId = null;
+
+  function deleteStreetMark(markId) {
+    if (streetMarks[markId]) {
+      const mark = streetMarks[markId];
+      deletedMarks[markId] = {
+        id: markId,
+        x: mark.x,
+        y: mark.y,
+        deleted: new Date().toISOString(),
+        originalMark: mark
+      };
+      delete streetMarks[markId];
+      localStorage.setItem(STREET_MARKS_KEY, JSON.stringify(streetMarks));
+      localStorage.setItem(DELETED_MARKS_KEY, JSON.stringify(deletedMarks));
+      renderStreetMarksWithDeletion();
+    }
+  }
+
+  function recoverStreetMark(markId) {
+    if (deletedMarks[markId]) {
+      const deletedMark = deletedMarks[markId];
+      streetMarks[markId] = deletedMark.originalMark;
+      delete deletedMarks[markId];
+      localStorage.setItem(STREET_MARKS_KEY, JSON.stringify(streetMarks));
+      localStorage.setItem(DELETED_MARKS_KEY, JSON.stringify(deletedMarks));
+      renderStreetMarksWithDeletion();
+    }
+  }
+
+  function renderStreetMarksWithDeletion() {
+    document.querySelectorAll('.street-marker').forEach(el => el.remove());
+    Object.keys(streetMarks).forEach(markId => {
+      const mark = streetMarks[markId];
+      createStreetMark(mark.x, mark.y, mark.contradiction);
+    });
+    Object.keys(deletedMarks).forEach(markId => {
+      const deletedMark = deletedMarks[markId];
+      const markEl = document.createElement('div');
+      markEl.className = 'street-marker deleted';
+      markEl.style.left = deletedMark.x + 'px';
+      markEl.style.top = deletedMark.y + 'px';
+      markEl.setAttribute('data-mark-id', markId);
+      world.appendChild(markEl);
+    });
+  }
+
+  function checkNearbyMarks() {
+    nearbyDeletedMarkId = null;
+    Object.keys(deletedMarks).forEach(markId => {
+      const mark = deletedMarks[markId];
+      const dx = x - mark.x;
+      const dy = y - mark.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 30) {
+        nearbyDeletedMarkId = markId;
+      }
+    });
+  }
+
+  window.addEventListener('keydown', (ev) => {
+    if ((ev.key === 'd' || ev.key === 'D') && nightActive && !endScreen.classList.contains('active')) {
+      let markedAtPosition = null;
+      Object.keys(streetMarks).forEach(markId => {
+        const mark = streetMarks[markId];
+        const dx = x - mark.x;
+        const dy = y - mark.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 30) {
+          markedAtPosition = markId;
+        }
+      });
+      if (markedAtPosition) {
+        deleteStreetMark(markedAtPosition);
+        ev.preventDefault();
+      }
+    }
+    if ((ev.key === 'u' || ev.key === 'U') && nightActive && !endScreen.classList.contains('active')) {
+      if (nearbyDeletedMarkId !== null) {
+        recoverStreetMark(nearbyDeletedMarkId);
+        ev.preventDefault();
+      }
+    }
+  });
+
+  const originalPlaceForDeletion = place;
+  place = function() {
+    originalPlaceForDeletion();
+    checkNearbyMarks();
+  };
+
+  renderStreetMarksWithDeletion();
+
+  const LOCATION_SNAPSHOTS_KEY = 'cartographer_location_snapshots';
   const locationSnapshots = JSON.parse(localStorage.getItem(LOCATION_SNAPSHOTS_KEY) || '{}');
   const snapshotLedger = document.getElementById('snapshot-ledger');
   const snapshotLedgerToggle = document.getElementById('snapshot-ledger-toggle');
@@ -220,7 +308,7 @@ const LOCATION_SNAPSHOTS_KEY = 'cartographer_location_snapshots';
     });
   };
 
-const STREET_MEMORY_KEY = 'cartographer_street_memory';
+  const STREET_MEMORY_KEY = 'cartographer_street_memory';
   const streetMemory = JSON.parse(localStorage.getItem(STREET_MEMORY_KEY) || '{}');
   let lastSegmentKey = null;
   let segmentPassageCount = {};
@@ -603,8 +691,6 @@ const STREET_MEMORY_KEY = 'cartographer_street_memory';
     lastRecordedPos = { x: x, y: y };
   };
 
-  const STREET_MARKS_KEY = 'cartographer_street_marks';
-  const streetMarks = JSON.parse(localStorage.getItem(STREET_MARKS_KEY) || '{}');
   let markMode = false;
   let lastMarkedCorner = null;
 
@@ -655,7 +741,7 @@ const STREET_MEMORY_KEY = 'cartographer_street_memory';
   loadStreetMarks();
 
   window.addEventListener('keydown', (ev) => {
-    if ((ev.key === 'm' || ev.key === 'M') && nightActive && !endScreen.classList.contains('active')) {
+    if ((ev.key === 'e' || ev.key === 'E') && nightActive && !endScreen.classList.contains('active')) {
       recordStreetMark(x, y);
       ev.preventDefault();
     }

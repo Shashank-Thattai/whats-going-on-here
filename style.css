@@ -49,6 +49,31 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.street-marker.deleted {
+  border: 2px dashed var(--ink);
+  background: transparent;
+  opacity: 0.3;
+}
+.street-marker.deleted::after {
+  content: '?';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  opacity: 0.5;
+}
+.street-marker.recoverable {
+  border: 2px dotted var(--ink);
+  background: transparent;
+  opacity: 0.5;
+  animation: pulse-recoverable 1200ms ease-in-out infinite;
+}
+@keyframes pulse-recoverable {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
 .location-snapshot {
   position: absolute;
   pointer-events: none;
