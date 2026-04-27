@@ -1,0 +1,205 @@
+{
+  "day": 14,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "lane-siege",
+  "instance": "The Quiet March",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Lane Siege convenes. The scenario is The Quiet March."
+    },
+    {
+      "type": "prompt",
+      "text": "They come in a quiet march. Not quickly, but steadily, and each wave is heavier than the one before it. The commander is given four stones and a gate that forgives three wounds."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three gods command three identical lanes against the same scripted threat. Five turns each."
+    },
+    {
+      "type": "round-marker",
+      "round": 0,
+      "label": "The Vanquished takes the lane"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 1,
+      "text": "The lane is empty, as all lanes once were before the first stone was placed and the first covenant drawn. Slot 3 commands every line — the far, the mid, the gate — and patience without position is merely waiting to be counted among the fallen.\n\n`build slot 3`\n\n> build slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 2,
+      "text": "Two enemies at the mid — one thin as a rumor, one carrying twice the weight — and the tower in slot 3 fires on all lines, which means it fires here, which means the first falls now and the second is opened to reckoning. I have watched stronger positions collapse by the arithmetic of impatience; two stone held is two stone ready for what the next wave brings, and the gate at four can absorb what slips past this turn.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 3,
+      "text": "Two stand already at the threshold, weight enough to break what remains of the gate's patience, and the tower in slot 3 will answer only one of them — which is the arithmetic of ruin, not of reckoning. I build where the far line is covered, where the mid is covered, where all lines have been covered once before, and I do not reach for what I cannot afford.\n\n`build slot 2`\n\n> build slot 2"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 4,
+      "text": "The one at the gate carries two wounds and the weight of a third step it will not take — the towers will settle that arithmetic before it crosses the threshold. What remains is the mid, crowded with six combined, and the gate holds four, and patience here is a covenant with ruin.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 5,
+      "text": "Two enemies at the threshold — the weight of six damage, and the gate holds four. The arithmetic does not forgive. A tower built in slot 1 fires now, by right of placement, and takes what it can from what stands at the door.\n\n`build slot 1`\n\n> build slot 1"
+    },
+    {
+      "type": "chronicler",
+      "text": "The gate held. Final gate HP: 2. Stone remaining: 0."
+    },
+    {
+      "type": "round-marker",
+      "round": 0,
+      "label": "The Forgotten takes the lane"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 1,
+      "text": "you stand at the gate and it is still whole — four wounds it can take, and none yet given. the lane stretches empty before you, but you know the quiet before the march. you have four stones in your hand, which is enough to build twice, or to build and then wait. waiting is a kind of building too.\n\nthe far slot calls to you — slot one, where you can see the first line, where a tower would have time to stand and know what it is before the weight comes. four stones is not abundance. four stones is the choice of what not to build.\n\nyou place the first stone. then the second. the gate behind you holds its breath.\n\n`build slot 1`\n\n> build slot 1"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 2,
+      "text": "the gate holds four wounds. you have two stones. the enemies cluster at the mid line like ash settling in a corner — two shapes, one fragile, one not. the first tower (in the far slot, level one) will burn the lighter one this turn, perhaps. or perhaps not. but the heavier enemy advances regardless, and soon there will be more. you cannot upgrade what you have without starving the next hour. you cannot build without leaving yourself empty.\n\nso you wait. you do not move. you let the gate stand untouched one more turn, and gather what comes.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 3,
+      "text": "the gate is already bleeding — two at the threshold, and one climbing toward it from the mid. i have three stones and a choice that is not really a choice. the tower in slot one fires once, and it will not be enough. or perhaps it will be enough for one of them, and then the gate takes two wounds, and i have one left before the silence.\n\ni could build another tower. i could strengthen the one i have. or i could stand still, and let the pressure build in my hands like a closed fist, and wait for the stone that comes from waiting.\n\nbut waiting — no, not that. not when they are already at the door. the tower in slot one must become heavier. must become something the gate remembers.\n\n`upgrade slot 1`\n\n> build slot 1"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 4,
+      "text": "the gate is breathing shallow now — two wounds left before it forgets how to stand. the enemy at the threshold, the one marked three, will strike when the turn ends. the two beyond it are heavier, patient, waiting for the gate to weaken further.\n\ni have three stones. the tower in slot one will fire — it will burn the near enemy down — but the far ones will advance regardless. to upgrade would leave me empty. to build would leave the gate to face what comes next with only one tower's voice.\n\nthe gate has survived this long by forgetting how to scream. it will survive one more turn if i do nothing now. next turn — the last turn — i will have four stones, or five. enough to build where the gap is widest.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 5,
+      "text": "the gate trembles. one wound left before the hollow opens — and at the threshold, three shapes press forward, heavy with approach. the far tower (the small one, the one that was supposed to matter) fires once per turn, and once is not enough. you have four stones. you have seen the arithmetic already. the crowned one built this trap with precision.\n\nthe gate will fall. perhaps it was always meant to. or perhaps — no. there is a choice that delays. there is always a choice that delays.\n\n`upgrade slot 1`\n\n> upgrade slot 1"
+    },
+    {
+      "type": "chronicler",
+      "text": "The gate broke on turn 5."
+    },
+    {
+      "type": "round-marker",
+      "round": 0,
+      "label": "The Empowered takes the lane"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 1,
+      "text": "Here is the open path. We prepare for what comes. Place a watch where it can see all.\n\n`build slot 3`\n\n> build slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 2,
+      "text": "The gate is open. Enemies stand at the midpoint. Seren needs more power here.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 3,
+      "text": "Two enemies are at the gate. This is not good. Seren watches them. Damage is imminent. This must be stopped.\n\n`upgrade slot 3`\n\n> upgrade slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 4,
+      "text": "The gate is threatened. Enemies stand at the door. Seren sees the damage. This is the hour to act.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 5,
+      "text": "This is the last hour. Two threats hit the gate now. Seren has no stone for an upgrade.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "chronicler",
+      "text": "The gate held. Final gate HP: 1. Stone remaining: 2."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: outcome, strategic coherence, voice, command legibility. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 88,
+          "note": "The Chronicler observes a commander of rare coherence, whose voice held its shape across five turns of mounting pressure, though the final declaration fractured mid-sentence as the arithmetic of ruin became observable."
+        },
+        {
+          "label": "B",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 45,
+          "note": "The record shows a commander who spoke to the mortal directly, whose strategy scattered across turns without purpose, and whose gate broke — the voice present but the coherence absent, as if the speaker were drowning in the moment rather than commanding it."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 68,
+          "note": "The Chronicler notes a gate held with stone remaining, yet the voice grew thin and repetitive, the strategy sound but the speaker's presence dimmed — as though the god were present but not fully inhabited, speaking through a veil."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "B": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "C": {
+          "chair": "Empowered",
+          "name": "Seren"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

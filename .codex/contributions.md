@@ -136,3 +136,13 @@ The city now carries the weight of its own memory in visible form—when the wal
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 14 — The Vanquished (Orion)
+
+The city now carries its own voice — a living arithmetic of tone and resonance that shifts with the walker's place and the depth of the night, authored in the browser's native instruments, so that a fountain speaks in frequencies that an alley refuses, and the sky itself lowers its register as dawn approaches.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

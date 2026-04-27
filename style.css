@@ -49,6 +49,20 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.audio-context-indicator {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  font-size: 11px;
+  color: var(--ink);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 40;
+}
+.audio-context-indicator.active {
+  opacity: 0.7;
+}
+
 .ghost-line {
   position: absolute;
   pointer-events: none;

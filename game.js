@@ -41,6 +41,145 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const audioContextIndicator = document.querySelector('.audio-context-indicator');
+  let audioContext = null;
+  let oscillators = {};
+  let gains = {};
+  let ambientGain = null;
+  let masterGain = null;
+  let currentSkyStage = 0;
+  let lastLocationKey = null;
+  let locationAmbience = null;
+  let locationGain = null;
+
+  function initializeAudio() {
+    if (audioContext) return;
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioContext.createGain();
+    masterGain.gain.value = 0.15;
+    masterGain.connect(audioContext.destination);
+    ambientGain = audioContext.createGain();
+    ambientGain.gain.value = 0.08;
+    ambientGain.connect(masterGain);
+    locationGain = audioContext.createGain();
+    locationGain.gain.value = 0.12;
+    locationGain.connect(masterGain);
+    audioContextIndicator.classList.add('active');
+  }
+
+  function createAmbientTone(frequency, stage) {
+    if (!audioContext) return;
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = frequency;
+    const baseGain = 0.04;
+    const stageAttenuation = (stage / 8) * 0.02;
+    gain.gain.value = baseGain - stageAttenuation;
+    osc.connect(gain);
+    gain.connect(ambientGain);
+    osc.start();
+    return { osc: osc, gain: gain };
+  }
+
+  function updateAmbientSoundscape(stage) {
+    if (!audioContext) return;
+    Object.keys(oscillators).forEach(key => {
+      oscillators[key].osc.stop();
+    });
+    oscillators = {};
+    const baseFrequencies = [55, 110, 165, 220];
+    const stageFrequencyShift = (stage / 8) * 20;
+    baseFrequencies.forEach((freq, idx) => {
+      const shiftedFreq = freq + stageFrequencyShift;
+      oscillators['ambient_' + idx] = createAmbientTone(shiftedFreq, stage);
+    });
+  }
+
+  function getLocationCategory(worldX, worldY) {
+    const gridX = Math.round(worldX / 80) * 80;
+    const gridY = Math.round(worldY / 80) * 80;
+    const hash = Math.abs(gridX * 73856093 ^ gridY * 19349663) % 4;
+    return ['square', 'alley', 'crossing', 'threshold'][hash];
+  }
+
+  function createLocationAmbience(category, stage) {
+    if (locationAmbience) {
+      locationAmbience.osc.stop();
+    }
+    if (!audioContext) return;
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    osc.type = 'triangle';
+    let baseFreq = 220;
+    let baseGain = 0.05;
+    switch (category) {
+      case 'square':
+        baseFreq = 185;
+        baseGain = 0.06;
+        break;
+      case 'alley':
+        baseFreq = 247;
+        baseGain = 0.04;
+        break;
+      case 'crossing':
+        baseFreq = 220;
+        baseGain = 0.07;
+        break;
+      case 'threshold':
+        baseFreq = 196;
+        baseGain = 0.05;
+        break;
+    }
+    const stageAttenuation = (stage / 8) * 0.03;
+    osc.frequency.value = baseFreq + (stage * 5);
+    gain.gain.value = baseGain - stageAttenuation;
+    osc.connect(gain);
+    gain.connect(locationGain);
+    osc.start();
+    locationAmbience = { osc: osc, gain: gain };
+  }
+
+  function updateLocationAmbience(stage) {
+    const locKey = getLocationCategory(x, y);
+    if (locKey !== lastLocationKey) {
+      createLocationAmbience(locKey, stage);
+      lastLocationKey = locKey;
+    }
+  }
+
+  function updateAudioState() {
+    if (!nightActive) return;
+    const now = Date.now();
+    const elapsed = now - nightStartTime;
+    const progress = Math.min(elapsed / NIGHT_DURATION, 1);
+    const stageIndex = Math.floor(progress * (NIGHT_STAGES - 1));
+    const stage = Math.min(stageIndex, NIGHT_STAGES - 1);
+    if (stage !== currentSkyStage) {
+      currentSkyStage = stage;
+      updateAmbientSoundscape(stage);
+    }
+    updateLocationAmbience(stage);
+  }
+
+  window.addEventListener('click', () => {
+    if (!audioContext) {
+      initializeAudio();
+    }
+  });
+
+  window.addEventListener('keydown', () => {
+    if (!audioContext) {
+      initializeAudio();
+    }
+  });
+
+  const originalUpdateSkyState = updateSkyState;
+  updateSkyState = function() {
+    originalUpdateSkyState();
+    updateAudioState();
+  };
+
   const GHOST_MARKS_KEY = 'cartographer_ghost_marks';
   const ghostMarks = JSON.parse(localStorage.getItem(GHOST_MARKS_KEY) || '{}');
   let renderedGhosts = {};
