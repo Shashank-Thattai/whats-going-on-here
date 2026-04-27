@@ -1,0 +1,88 @@
+{
+  "day": 13,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "codex-duel",
+  "instance": "The Unmapped Country",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Codex Duel convenes. The arena is The Unmapped Country."
+    },
+    {
+      "type": "prompt",
+      "text": "describe a map of a country that does not exist, in roughly 100 words"
+    },
+    {
+      "type": "chronicler",
+      "text": "Three entries arrive. Their authorship is hidden from me — I score them blind."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "Here is a country that was never drawn, yet here is its map: a coastline in the manner of a held breath, three rivers that do not reach the sea, a capital marked by a symbol no living tongue can pronounce. The western province bears a name that translates, roughly, as *the place where reckoning was postponed.* The border is a covenant with no second signatory. I have traced this cartography before, with a finger, in the dark, on a surface that remembered the pressure. The country does not exist because the letter arrived before the founding. It was mine. It will not be again."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "Here is the map. You see it. It shows the country of the Crowned Sun. This land does not exist today. It lived in the past. It will live again.\n\nThe map shows a desert. It is wide. It is red. The desert holds no water. It holds only light. This is good. Light is useful.\n\nRivers of fire mark the borders. They burn high. They burn clean. No one crosses them. This is clear.\n\nAt the center, a peak. It is tall. It is smooth. Here the sun rests at noon. The crown rests here too. You see it. This is proof."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "the map was drawn on something like silk, or the skin of something that had been silk once. the borders were in ash—no, not ash, forgive me. in a grey powder that came off on the reader's thumb. the namer stood in the cartographer's room (a room with one window, always closed) and traced the coastline with a finger that left no mark.\n\n\"where is this?\" the namer asked.\n\nthe cartographer did not answer. perhaps they could not. perhaps the country existed only while being traced—the moment the namer's finger lifted, the powder redistributed itself. the silk beneath was blank again. the namer returned each morning anyway, drawing the same borders over and over, as if repetition might make it real.\n\nit never did."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: imagery, voice, economy, echo. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 93,
+          "note": "The Rite was held in a register of precise absence—each image rendered not as what is, but as what the map refuses to show, and the voice does not waver."
+        },
+        {
+          "label": "B",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 35,
+          "note": "The codex records that this entry speaks in generalities and repetition where specificity was required, and the second-person address breaks the register of narration."
+        },
+        {
+          "label": "C",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 92,
+          "note": "The scales weigh a myth that renders the unmappable through the precise texture of its own undoing, each sentence necessary, each detail earning its place."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "B": {
+          "chair": "Empowered",
+          "name": "Seren"
+        },
+        "C": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

@@ -41,6 +41,109 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const GHOST_MARKS_KEY = 'cartographer_ghost_marks';
+  const ghostMarks = JSON.parse(localStorage.getItem(GHOST_MARKS_KEY) || '{}');
+  let renderedGhosts = {};
+
+  function captureMarkState(markId, mark) {
+    if (!ghostMarks[markId]) {
+      ghostMarks[markId] = {
+        id: markId,
+        x: mark.x,
+        y: mark.y,
+        states: []
+      };
+    }
+    const state = {
+      timestamp: new Date().toISOString(),
+      skyStage: sky.className.replace('night-', ''),
+      contradiction: mark.contradiction || false
+    };
+    ghostMarks[markId].states.push(state);
+    if (ghostMarks[markId].states.length > 3) {
+      ghostMarks[markId].states.shift();
+    }
+    localStorage.setItem(GHOST_MARKS_KEY, JSON.stringify(ghostMarks));
+  }
+
+  function renderGhostLine(markId) {
+    const ghostData = ghostMarks[markId];
+    if (!ghostData || ghostData.states.length < 2) {
+      return;
+    }
+    const previousState = ghostData.states[ghostData.states.length - 2];
+    const currentState = ghostData.states[ghostData.states.length - 1];
+    const ghostId = 'ghost_' + markId;
+    let ghostEl = document.getElementById(ghostId);
+    
+    if (!ghostEl) {
+      ghostEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      ghostEl.id = ghostId;
+      ghostEl.setAttribute('viewBox', '-40 -40 80 80');
+      ghostEl.setAttribute('width', '80');
+      ghostEl.setAttribute('height', '80');
+      ghostEl.classList.add('ghost-line');
+      world.appendChild(ghostEl);
+    }
+    
+    ghostEl.style.left = (ghostData.x - 40) + 'px';
+    ghostEl.style.top = (ghostData.y - 40) + 'px';
+    
+    const circle = ghostEl.querySelector('circle') || document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', '0');
+    circle.setAttribute('cy', '0');
+    circle.setAttribute('r', '8');
+    circle.setAttribute('stroke', 'currentColor');
+    circle.setAttribute('fill', 'none');
+    if (!ghostEl.querySelector('circle')) {
+      ghostEl.appendChild(circle);
+    }
+    
+    renderedGhosts[ghostId] = true;
+  }
+
+  const originalRecordStreetMark = recordStreetMark;
+  recordStreetMark = function(worldX, worldY) {
+    const markId = Math.floor(worldX) + '_' + Math.floor(worldY);
+    const existingMark = streetMarks[markId];
+    
+    if (existingMark) {
+      captureMarkState(markId, existingMark);
+    }
+    
+    originalRecordStreetMark(worldX, worldY);
+  };
+
+  function loadGhostMarks() {
+    Object.keys(ghostMarks).forEach(markId => {
+      renderGhostLine(markId);
+    });
+  }
+
+  loadGhostMarks();
+
+  const originalPlaceGhosts = place;
+  place = function() {
+    originalPlaceGhosts();
+    Object.keys(renderedGhosts).forEach(ghostId => {
+      const ghostEl = document.getElementById(ghostId);
+      if (ghostEl) {
+        const markId = ghostId.replace('ghost_', '');
+        const ghostData = ghostMarks[markId];
+        if (ghostData) {
+          const dx = x - ghostData.x;
+          const dy = y - ghostData.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 100) {
+            ghostEl.classList.add('visible');
+          } else {
+            ghostEl.classList.remove('visible');
+          }
+        }
+      }
+    });
+  };
+
   const STREET_MARKS_KEY = 'cartographer_street_marks';
   const streetMarks = JSON.parse(localStorage.getItem(STREET_MARKS_KEY) || '{}');
   const DELETED_MARKS_KEY = 'cartographer_deleted_marks';

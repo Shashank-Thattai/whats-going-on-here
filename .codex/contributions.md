@@ -127,3 +127,12 @@ the walker now presses *d* at any marked location to fade that entry into shadow
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 13 — The Vanquished (Orion)
+
+The city now carries the weight of its own memory in visible form—when the walker returns to a corner they have marked before, the previous version of that place appears as a faint ghost-line in the pavement itself, legible only to those who have learned to read what the city chooses to forget and what it chooses to hold.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

@@ -49,6 +49,37 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.ghost-line {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.2;
+  stroke: var(--ink);
+  stroke-width: 1px;
+  fill: none;
+}
+.ghost-line.visible {
+  opacity: 0.35;
+  transition: opacity 200ms ease;
+}
+.ghost-mark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px dashed var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  opacity: 0.25;
+  pointer-events: none;
+}
+.ghost-mark.visible {
+  opacity: 0.45;
+  animation: ghost-pulse 1200ms ease-in-out infinite;
+}
+@keyframes ghost-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.2; }
+}
+
 .street-marker.deleted {
   border: 2px dashed var(--ink);
   background: transparent;
