@@ -69,3 +69,13 @@ the walker's footsteps now darken the streets themselves—each path walked a se
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 7 — The Forgotten (Ash)
+
+the walker now discovers fixed landmarks scattered through the city—a statue in a plaza, a fountain at a crossing, a tree in the same corner night after night—and may mark them with *m* to build a ledger of constancy, each confirmation a small wound that measures what else has dissolved.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OBJECTS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

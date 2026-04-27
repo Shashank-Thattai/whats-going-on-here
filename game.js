@@ -50,6 +50,101 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const LANDMARKS_KEY = 'cartographer_landmarks';
+  const landmarks = JSON.parse(localStorage.getItem(LANDMARKS_KEY) || '{}');
+  const landmarkData = [
+    { id: 0, x: 300, y: -100, type: 'statue', name: 'statue' },
+    { id: 1, x: -200, y: 200, type: 'fountain', name: 'fountain' },
+    { id: 2, x: 150, y: 300, type: 'tree', name: 'tree' }
+  ];
+  let nearbyLandmarkId = null;
+
+  function initializeLandmarks() {
+    landmarkData.forEach(lm => {
+      const key = lm.id.toString();
+      if (!landmarks[key]) {
+        landmarks[key] = {
+          id: lm.id,
+          x: lm.x,
+          y: lm.y,
+          type: lm.type,
+          name: lm.name,
+          confirmations: 0,
+          firstSeen: new Date().toISOString()
+        };
+      }
+    });
+    localStorage.setItem(LANDMARKS_KEY, JSON.stringify(landmarks));
+  }
+
+  function renderLandmarks() {
+    landmarkData.forEach(lm => {
+      const key = lm.id.toString();
+      const el = document.querySelector(`[data-landmark="${lm.id}"]`);
+      if (el) {
+        if (landmarks[key] && landmarks[key].confirmations > 0) {
+          el.classList.add('confirmed');
+          let existingCount = el.querySelector('.landmark-confirmation-count');
+          if (!existingCount) {
+            existingCount = document.createElement('div');
+            existingCount.className = 'landmark-confirmation-count';
+            el.appendChild(existingCount);
+          }
+          existingCount.textContent = 'still here (' + landmarks[key].confirmations + ')';
+        }
+      }
+    });
+  }
+
+  function confirmLandmark(landmarkId) {
+    const key = landmarkId.toString();
+    if (landmarks[key]) {
+      landmarks[key].confirmations += 1;
+      landmarks[key].lastConfirmed = new Date().toISOString();
+      localStorage.setItem(LANDMARKS_KEY, JSON.stringify(landmarks));
+      renderLandmarks();
+    }
+  }
+
+  function checkLandmarks() {
+    nearbyLandmarkId = null;
+    landmarkData.forEach(lm => {
+      const dx = x - lm.x;
+      const dy = y - lm.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 40) {
+        nearbyLandmarkId = lm.id;
+      }
+    });
+  }
+
+  const originalWindowKeydown = window.addEventListener;
+  const keydownHandlers = [];
+  window.addEventListener = function(type, handler, options) {
+    if (type === 'keydown') {
+      keydownHandlers.push(handler);
+    }
+    return originalWindowKeydown.call(this, type, handler, options);
+  };
+
+  window.addEventListener('keydown', (ev) => {
+    if ((ev.key === 'm' || ev.key === 'M') && nightActive && !endScreen.classList.contains('active')) {
+      if (nearbyLandmarkId !== null) {
+        confirmLandmark(nearbyLandmarkId);
+        ev.preventDefault();
+      }
+    }
+  });
+
+  initializeLandmarks();
+  renderLandmarks();
+
+  const originalPlaceForLandmarks = place;
+  place = function() {
+    originalPlaceForLandmarks();
+    checkLandmarks();
+  };
+
   const FOOTPRINT_TRAILS_KEY = 'cartographer_footprint_trails';
   const footprintTrails = JSON.parse(localStorage.getItem(FOOTPRINT_TRAILS_KEY) || '{}');
   let lastRecordedPos = { x: x, y: y };

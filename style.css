@@ -49,6 +49,50 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.landmark {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+.landmark:hover {
+  opacity: 0.7;
+}
+.landmark-statue {
+  width: 24px;
+  height: 32px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+.landmark-fountain {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.landmark-tree {
+  width: 20px;
+  height: 24px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.landmark.confirmed {
+  border-width: 2px;
+  opacity: 0.9;
+}
+.landmark-confirmation-count {
+  position: absolute;
+  font-size: 9px;
+  color: var(--ink);
+  opacity: 0.6;
+  pointer-events: none;
+  white-space: nowrap;
+  margin-left: 28px;
+  margin-top: -2px;
+}
+
 .footprint-trail {
   position: absolute;
   pointer-events: none;
