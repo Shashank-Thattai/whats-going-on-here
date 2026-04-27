@@ -50,6 +50,52 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const OBSERVATION_KEY = 'cartographer_observations';
+  const endScreen = document.getElementById('end-screen');
+  const observationInput = document.getElementById('observation-input');
+  const observationSubmit = document.getElementById('observation-submit');
+  let nightActive = true;
+
+  function endNight() {
+    nightActive = false;
+    endScreen.classList.add('active');
+    observationInput.focus();
+  }
+
+  function saveObservation(text) {
+    if (text.trim().length === 0) {
+      return;
+    }
+    const observations = JSON.parse(localStorage.getItem(OBSERVATION_KEY) || '[]');
+    observations.push({
+      text: text.trim(),
+      timestamp: new Date().toISOString(),
+      date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    });
+    localStorage.setItem(OBSERVATION_KEY, JSON.stringify(observations));
+  }
+
+  observationSubmit.addEventListener('click', () => {
+    saveObservation(observationInput.value);
+    observationInput.value = '';
+    endScreen.classList.remove('active');
+  });
+
+  observationInput.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && ev.ctrlKey) {
+      saveObservation(observationInput.value);
+      observationInput.value = '';
+      endScreen.classList.remove('active');
+    }
+  });
+
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && endScreen.classList.contains('active')) {
+      observationInput.value = '';
+      endScreen.classList.remove('active');
+    }
+  });
+
   const markedPlaces = JSON.parse(localStorage.getItem('markedPlaces') || '{}');
   const markPrompt = document.querySelector('.mark-prompt');
   let nearbyDoorId = null;

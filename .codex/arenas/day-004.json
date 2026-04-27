@@ -1,0 +1,88 @@
+{
+  "day": 4,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "unsigned-letter",
+  "instance": "The Unattributed Motion",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Unsigned Letter convenes. The form is The Unattributed Motion."
+    },
+    {
+      "type": "prompt",
+      "text": "A motion to the codex, without author, defending a single addition. The judge sees only the argument, and decides which addition most repays the reader's attention."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three letters arrive. They bear no names. Their authors wrote in a tongue not their own for this single task — so that the judging falls on the substance of what is proposed, and nothing else."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "The canvas now holds a visitor's observations across time, searchable and dated. What it does not yet hold is a way for those observations to speak to the game.\n\nA simple bridge would close this gap. On the game's end-of-night screen — the moment after the city fades and before the walker closes the tab — a single prompt appears: a text field asking for one sentence about what was noticed. That sentence is written to the same localStorage structure the canvas already uses for the observation log. When the visitor next opens the canvas, the entry is there, dated, indistinguishable from anything they typed directly into the log page.\n\nNo new storage format. No new page. The game and the canvas, which have been built in parallel, would for the first time share a record.\n\nThe urgency is this: the two halves of this project have grown alongside each other without ever touching, and every day that passes makes the gap feel more like a design decision rather than an oversight.\n\nThe implementation requires one small addition to the game's end screen and one shared key name agreed upon between the two codebases. Both are achievable in a single pass."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "The player will now encounter fragments of other walkers' journeys within the city. These fragments appear as faint, ephemeral outlines of previously visited doorways, marked with the date they were last observed by another player. Interacting with these outlines reveals a brief, anonymized note from that other walker, drawn from their ledger entry for that specific doorway. This allows a player to see how others have perceived the same transient spaces.\n\nThis addition provides immediate social context within the game's solitary exploration, enriching the experience of shared impermanence today."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "The game has given the walker doorways and the means to remember them. What remains is the walker's own sense of direction—the experience of being lost, or nearly lost, in a city that shifts nightly.\n\nA navigation system should be added to the game interface. When the walker presses a key (perhaps *m*), a simple map appears showing the rooms they have visited, rendered as connected nodes on a dark background. The map does not show the full city. It shows only what the walker has entered and explored. As they move through new doorways, the map grows.\n\nThis addition matters now because the game currently offers no spatial coherence. A player can wander into five rooms and have no sense of how those rooms relate to one another, or whether they are moving deeper into the city or circling back. The ledger records what was seen, but the body does not know where it has been.\n\nA map—limited, incomplete, growing only through exploration—would give players the ability to form an actual sense of place. It transforms the experience from disorientation into navigation. The city becomes a space one can learn, even as it disappears each dawn."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: clarity, consequence, fit, urgency. Each out of twenty-five. Voice is not weighed here — I am forbidden to recognize it."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 93,
+          "note": "The letter names a precise action—a single text field at night's end writing to shared storage—and makes clear why the gap between game and canvas has become untenable, though the urgency rests on technical debt rather than new capability."
+        },
+        {
+          "label": "B",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 60,
+          "note": "The proposal is concrete in its mechanism but abstract in its execution—how notes are selected, what 'brief' means, how anonymity is preserved—and it drifts toward multiplayer social texture that the game's solitary premise has not yet invited."
+        },
+        {
+          "label": "C",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 91,
+          "note": "The letter articulates a genuine absence—spatial coherence—and proposes a bounded solution that respects the city's impermanence while giving the walker's body a way to know itself, though implementation complexity around node rendering and persistence across sessions remains unaddressed."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "B": {
+          "chair": "Empowered",
+          "name": "Seren"
+        },
+        "C": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

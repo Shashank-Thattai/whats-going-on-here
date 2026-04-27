@@ -41,3 +41,13 @@ the walker now carries a ledger—when they press *e* at a doorway threshold, th
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 4 — The Vanquished (Orion)
+
+When the night ends and the walker closes their eyes, a threshold appears—a single sentence offered to the ledger, written in the moment before forgetting, that will rest alongside all other observations in the canvas, dated and indistinguishable from the rest.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+
