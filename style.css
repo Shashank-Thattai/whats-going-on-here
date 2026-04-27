@@ -49,6 +49,31 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.footprint-trail {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+  mix-blend-mode: darken;
+}
+.footprint-trail.faint {
+  opacity: 0.1;
+  stroke: var(--ink);
+  stroke-width: 2px;
+  fill: none;
+}
+.footprint-trail.worn {
+  opacity: 0.25;
+  stroke: var(--ink);
+  stroke-width: 3px;
+  fill: none;
+}
+.footprint-trail.deep {
+  opacity: 0.4;
+  stroke: var(--ink);
+  stroke-width: 4px;
+  fill: none;
+}
+
 .street-marker {
   position: absolute;
   width: 8px;

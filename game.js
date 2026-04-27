@@ -50,6 +50,90 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const FOOTPRINT_TRAILS_KEY = 'cartographer_footprint_trails';
+  const footprintTrails = JSON.parse(localStorage.getItem(FOOTPRINT_TRAILS_KEY) || '{}');
+  let lastRecordedPos = { x: x, y: y };
+  const TRAIL_RECORD_INTERVAL = 8; // record every 8 pixels walked
+  let distanceSinceLastRecord = 0;
+
+  function getTrailKey(fromX, toX, fromY, toY) {
+    const roundX1 = Math.round(fromX / 4) * 4;
+    const roundY1 = Math.round(fromY / 4) * 4;
+    const roundX2 = Math.round(toX / 4) * 4;
+    const roundY2 = Math.round(toY / 4) * 4;
+    return roundX1 + '_' + roundY1 + '_' + roundX2 + '_' + roundY2;
+  }
+
+  function recordFootprint(fromX, fromY, toX, toY) {
+    const key = getTrailKey(fromX, toY, toX, toY);
+    if (!footprintTrails[key]) {
+      footprintTrails[key] = {
+        fromX: fromX,
+        fromY: fromY,
+        toX: toX,
+        toY: toY,
+        count: 0
+      };
+    }
+    footprintTrails[key].count += 1;
+    localStorage.setItem(FOOTPRINT_TRAILS_KEY, JSON.stringify(footprintTrails));
+  }
+
+  function renderFootprintTrails() {
+    document.querySelectorAll('.footprint-trail').forEach(el => el.remove());
+    Object.keys(footprintTrails).forEach(key => {
+      const trail = footprintTrails[key];
+      const count = trail.count;
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '-50 -50 100 100');
+      svg.setAttribute('width', '100');
+      svg.setAttribute('height', '100');
+      svg.classList.add('footprint-trail');
+      
+      let intensity = 'faint';
+      if (count >= 5) intensity = 'worn';
+      if (count >= 10) intensity = 'deep';
+      svg.classList.add(intensity);
+      
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      const dx = trail.toX - trail.fromX;
+      const dy = trail.toY - trail.fromY;
+      line.setAttribute('x1', String(dx * -0.5));
+      line.setAttribute('y1', String(dy * -0.5));
+      line.setAttribute('x2', String(dx * 0.5));
+      line.setAttribute('y2', String(dy * 0.5));
+      line.setAttribute('stroke', 'currentColor');
+      svg.appendChild(line);
+      
+      svg.style.left = (trail.fromX + trail.toX) / 2 + 'px';
+      svg.style.top = (trail.fromY + trail.toY) / 2 + 'px';
+      world.appendChild(svg);
+    });
+  }
+
+  function loadFootprintTrails() {
+    renderFootprintTrails();
+  }
+
+  loadFootprintTrails();
+
+  const originalPlaceFootprints = place;
+  place = function() {
+    originalPlaceFootprints();
+    
+    const dx = x - lastRecordedPos.x;
+    const dy = y - lastRecordedPos.y;
+    distanceSinceLastRecord += Math.sqrt(dx * dx + dy * dy);
+    
+    if (distanceSinceLastRecord >= TRAIL_RECORD_INTERVAL) {
+      recordFootprint(lastRecordedPos.x, lastRecordedPos.y, x, y);
+      renderFootprintTrails();
+      distanceSinceLastRecord = 0;
+    }
+    
+    lastRecordedPos = { x: x, y: y };
+  };
+
   const STREET_MARKS_KEY = 'cartographer_street_marks';
   const streetMarks = JSON.parse(localStorage.getItem(STREET_MARKS_KEY) || '{}');
   let markMode = false;

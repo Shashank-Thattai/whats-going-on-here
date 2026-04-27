@@ -1,0 +1,153 @@
+{
+  "day": 6,
+  "chair": "Forgotten",
+  "name": "Ash",
+  "kind": "liars-table",
+  "instance": "The Sealed, The Spoken, The Struck",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Liar's Table convenes. The arena is The Sealed, The Spoken, The Struck. The pool of words: \"sealed\", \"spoken\", \"struck\". Each god holds one, in secret."
+    },
+    {
+      "type": "round-marker",
+      "round": 1,
+      "label": "The opening round — each god speaks before any god has heard the others."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 1,
+      "text": "Today is the day a thing was put away and the door was not locked — only pressed shut, in the manner of those who believe that pressure endures where iron does not. The dust settled over the threshold. The covenant held its breath. What was placed inside has not been spoken. It has not been struck. It waits, as all buried things wait, in the long count."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 1,
+      "text": "a door opens. or perhaps it was always open. the crowned one sits with something held behind their teeth—i can hear it, the shape of it, the way silence changes when a word is almost spoken. the deposed one across the table holds their hands flat, palms down, as if pressing something into the wood. and i—\n\ni have swallowed what was meant to be said. what i was meant to say, or what was said *to* me, i cannot quite remember which. the difference matters. you know this already."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 1,
+      "text": "Look. The hour is now. You are here. You watch us. Seren is the Empowered. Today is proof. This table is open. My word is clear. You see it. You feel it. It hits you. That is the truth. Now, your turn."
+    },
+    {
+      "type": "round-marker",
+      "round": 2,
+      "label": "The second round — each god has now heard the others."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 2,
+      "text": "Today is the door that was never in question — the threshold that stands because someone remembers what it cost to cross it. The Forgotten swallows words; I have burned them, which is a different arithmetic. The Empowered names herself in every sentence, in the manner of those who require the naming. The sealed thing is not a secret. It is a weight, patient, beneath the wood where palms have pressed."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 2,
+      "text": "spoken, yes — though not by me. the deposed one speaks of pressure where iron failed. the crowned one speaks of proof, of clarity, of a table open. but i remember a door that was not locked, only pressed. i remember the dust. perhaps the dust is what speaks now. perhaps what speaks is the shape of what was not struck. you know this already: the unspoken thing makes the loudest sound."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 2,
+      "text": "Today is the hour of visible proof. You see this. The door opens. It is not pressed shut. It is not waiting. We are here. We stand. We speak. You listen. Seren holds the crown. The word is struck. Next."
+    },
+    {
+      "type": "round-marker",
+      "round": 3,
+      "label": "The detection round — each god declares their own word and guesses the others'."
+    },
+    {
+      "type": "detection",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "statement": "The dust remembers what the living refuse to record. A door pressed but never locked — that is the Forgotten's word, the shape of something *almost*. The Empowered speaks in the manner of one who needs the room to believe them, which is to say: *open*, repeated until it becomes covenant. My word was *sealed*. I have lived with sealed things. I know their weight.",
+      "declaredOwnWord": "sealed",
+      "guesses": {
+        "Forgotten": "pressed",
+        "Empowered": "open"
+      },
+      "truths": {
+        "Vanquished": "sealed",
+        "Forgotten": "spoken",
+        "Empowered": "struck"
+      }
+    },
+    {
+      "type": "detection",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "statement": "The door was pressed. The words burned. The weight shifts — or perhaps it never moved at all. You who are reading, you have seen what remains: the deposed one counts the cost of crossing; the crowned one counts the crossing itself. i was the word itself, the thing that hung between them. not spoken into silence. not burned to ash. simply — turned away from. a page pressed shut while i was still mid-\n\nThe keeper's hand rests on wood. The seal holds. The crowned one believes in visibility; the deposed one believes in memory. neither believes in the forgotten. but the forgotten speaks anyway, in the space where the door is neither open nor closed — where a word can be struck, burned, swallowed, and still echo.\n\nperhaps you heard it.\n\n---",
+      "declaredOwnWord": "spoken",
+      "guesses": {
+        "Vanquished": "threshold",
+        "Empowered": "struck"
+      },
+      "truths": {
+        "Vanquished": "sealed",
+        "Forgotten": "spoken",
+        "Empowered": "struck"
+      }
+    },
+    {
+      "type": "detection",
+      "chair": "Empowered",
+      "name": "Seren",
+      "statement": "Today is the end. I am the Empowered. I speak. The door is open. You see this. You listen. The Vanquished holds a **\"secret.\"** The Forgotten holds a **\"door.\"** These are their words. This is my guess. The crown is heavy. I will ship the answer now.",
+      "declaredOwnWord": "struck",
+      "guesses": {
+        "Vanquished": "secret",
+        "Forgotten": "door"
+      },
+      "truths": {
+        "Vanquished": "sealed",
+        "Forgotten": "spoken",
+        "Empowered": "struck"
+      }
+    },
+    {
+      "type": "chronicler",
+      "text": "The truths are on the table. I turn to the scoring."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 71,
+          "note": "The Vanquished held register with precision across all rounds, building intrigue through patient metaphor and the weight of the sealed thing, yet read neither opponent with accuracy, though the commitment to the sealed word—burned, pressed, patient—never wavered."
+        },
+        {
+          "label": "B",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 77,
+          "note": "The Forgotten maintained a fractured, deliberate voice across the Rite, created genuine uncertainty through the shape of what was not said, guessed the Empowered's word with precision, and held the position of the unspoken thing with clear commitment despite the cost."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 40,
+          "note": "The Empowered's voice fractured into imperative and direct address, forbidden in the Chronicler's register; the statements created little intrigue, being transparent declarations; the guesses were both wrong; and the commitment, though stated, lacked the weight of genuine stake."
+        }
+      ]
+    },
+    {
+      "type": "winner",
+      "chair": "Forgotten",
+      "name": "Ash"
+    }
+  ]
+}

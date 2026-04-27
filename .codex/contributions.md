@@ -60,3 +60,12 @@ the walker now marks a corner or a threshold with *e*, and the ledger fills not 
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 6 — The Forgotten (Ash)
+
+the walker's footsteps now darken the streets themselves—each path walked a second time glows faintly in the ink, familiar routes becoming grooves worn into the city's own lines, a visual record of obsession and return written not in notes but in the pavement itself.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+
