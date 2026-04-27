@@ -1,0 +1,88 @@
+{
+  "day": 8,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "construction",
+  "instance": "A Single Room",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Construction convenes. The brief is A Single Room. Each god must build a single-file HTML page."
+    },
+    {
+      "type": "prompt",
+      "text": "Build a single-file HTML page: one room, first-person, described in second person. The mortal lands on the page and the room receives them. The room must contain at least three interactable objects (click or hover), each of which reveals or changes something about the room or the mortal's knowledge of it. The room is yours to invent."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three builds arrive. Their authorship is hidden from me — I read the source blind."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>The Crown's Hour</title>\n    <style>\n        body {\n            font-family: 'Georgia', serif;\n            background-color: #0d0d0d;\n            color: #e0e0e0;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n            margin: 0;\n            overflow: hidden;\n            text-align: center;\n            line-height: 1.6;\n        }\n        .container {\n            width: 90%;\n            max-width: 800px;\n            padding: 2em;\n            border: 1px solid #333;\n            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);\n            position: relative;\n            background-color: #1a1a1a;\n        }\n        h1 {\n            color: #ffd700;\n            font-size: 2.5em;\n            margin-bottom: 0.5em;\n            text-transform: uppercase;\n            letter-spacing: 2px;\n        }\n        p {\n            margin-bottom: 1em;\n            font-size: 1.1em;\n        }\n        .interactable {\n            cursor: pointer;\n            text-decoration: underline;\n            color: #ffa500;\n            font-weight: bold;\n            transition: color 0.2s ease-in-out;\n        }\n        .interactable:hover {\n            color: #ffd700;\n        }\n        .hidden-text {\n            opacity: 0;\n            max-height: 0;\n            overflow: hidden;\n            transition: opacity 0.5s ease-out, max-height 0.5s ease-out;\n            color: #ccc;\n            font-style: italic;\n            margin-top: 0.5em;\n        }\n        .hidden-text.visible {\n            opacity: 1;\n            max-height: 100px; /* Adjust as needed */\n        }\n        .crown-svg {\n            display: block;\n            margin: 1em auto 2em auto;\n            width: 80px;\n            height: 80px;\n            fill: #ffd700;\n            transition: transform 0.3s ease-in-out;\n        }\n        .crown-svg:hover {\n            transform: scale(1.1);\n        }\n        .timer-display {\n            font-size: 1.2em;\n            color: #ffd700;\n            margin-top: 1.5em;\n            font-weight: bold;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <h1>The Sunken Hall</h1>\n        <p>You stand here. This is the room. Light falls from a crack \n\n…4199 more characters…"
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>The Room of the Vanquished</title>\n<style>\n  @import url('data:text/css,');\n\n  * {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n  }\n\n  body {\n    background-color: #0d0b09;\n    color: #c9b89a;\n    font-family: Georgia, 'Times New Roman', serif;\n    min-height: 100vh;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: flex-start;\n    padding: 3rem 1.5rem 4rem;\n  }\n\n  #chamber {\n    max-width: 680px;\n    width: 100%;\n    position: relative;\n  }\n\n  #entry-text {\n    font-size: 1.05rem;\n    line-height: 1.85;\n    letter-spacing: 0.02em;\n    margin-bottom: 2.5rem;\n    color: #b8a888;\n  }\n\n  #entry-text em {\n    color: #d4c4a0;\n    font-style: normal;\n    font-variant: small-caps;\n    letter-spacing: 0.08em;\n  }\n\n  .divider {\n    width: 100%;\n    height: 1px;\n    background: linear-gradient(to right, transparent, #5a4a32, transparent);\n    margin: 2rem 0;\n  }\n\n  #room-description {\n    font-size: 1rem;\n    line-height: 1.9;\n    color: #a89878;\n    margin-bottom: 2.5rem;\n    transition: color 0.8s ease;\n  }\n\n  #objects-grid {\n    display: flex;\n    flex-direction: column;\n    gap: 1.8rem;\n    margin-bottom: 3rem;\n  }\n\n  .object {\n    border-left: 2px solid #3a2e1e;\n    padding-left: 1.2rem;\n    cursor: pointer;\n    transition: border-color 0.4s ease;\n    position: relative;\n  }\n\n  .object:hover {\n    border-left-color: #8a7050;\n  }\n\n  .object-name {\n    font-size: 0.78rem;\n    letter-spacing: 0.15em;\n    text-transform: uppercase;\n    color: #6a5a3a;\n    margin-bottom: 0.4rem;\n    transition: color 0.4s ease;\n  }\n\n  .object:hover .object-name {\n    color: #a08050;\n  }\n\n  .object-desc {\n    font-size: 0.97rem;\n    line-height: 1.75;\n    color: #9a8868;\n    transition: color 0.4s ease;\n  }\n\n  .object:hover .object-desc {\n    color: #b8a888;\n  }\n\n  .object-reveal {\n    font-size: 0.93rem;\n    line-height: 1.8;\n    color: #c8b890;\n    margin-top: 0.8rem;\n    padding-top: 0.8rem;\n    border-top: 1px solid #2a2218;\n    display: none;\n    animation: fadeIn 0.9s ease forwards;\n  }\n\n  .object-reveal.shown {\n    display: block;\n  }\n\n  .object-reveal em {\n    color: #d4c090;\n    font-style: italic;\n  }\n\n  @keyframes fadeIn {\n    from { opacity: 0; transform: translateY(4px); }\n    t\n\n…14761 more characters…"
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>the room, or what remains of it</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: Georgia, serif;\n            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);\n            color: #d4af37;\n            line-height: 1.8;\n            overflow: hidden;\n            height: 100vh;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n        }\n\n        .container {\n            width: 90vw;\n            height: 90vh;\n            max-width: 1000px;\n            max-height: 700px;\n            position: relative;\n            background: linear-gradient(to bottom, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);\n            border: 2px solid #4a4a4a;\n            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.1);\n            overflow: hidden;\n        }\n\n        .room-text {\n            position: absolute;\n            top: 40px;\n            left: 50px;\n            right: 50px;\n            font-size: 18px;\n            color: #b8860b;\n            line-height: 1.9;\n            z-index: 10;\n            pointer-events: none;\n            max-width: 600px;\n        }\n\n        .room-text p {\n            margin-bottom: 20px;\n            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);\n        }\n\n        .room-text em {\n            color: #d4af37;\n            font-style: italic;\n        }\n\n        .interactable {\n            cursor: pointer;\n            position: relative;\n            transition: all 0.3s ease;\n            text-decoration: underline;\n            text-decoration-color: rgba(212, 175, 55, 0.3);\n        }\n\n        .interactable:hover {\n            color: #ffd700;\n            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);\n            text-decoration-color: rgba(255, 215, 0, 0.8);\n        }\n\n        .object {\n            position: absolute;\n            cursor: pointer;\n            user-select: none;\n        }\n\n        .chair {\n            bottom: 120px;\n            left: 100px;\n            width: 120px;\n            height: 140px;\n        }\n\n        .mirror {\n            top: 80px;\n            right: 60px;\n            width: 160px;\n         \n\n…9369 more characters…"
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: craft, coherence, welcome, originality. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 70,
+          "note": "The Sunken Hall is well-formed and immediately legible, but the timer and crown-toggle feel tacked to a coherent core, and the voice wavers between the Chronicler's register and direct address to the mortal."
+        },
+        {
+          "label": "B",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 87,
+          "note": "The Room of the Vanquished is incomplete in its rendering — the HTML cuts off mid-element — yet what remains argues with singular precision for a space of weight and ash, where every interaction deepens the mortal's knowledge of their own smallness."
+        },
+        {
+          "label": "C",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 62,
+          "note": "The room, or what remains of it, is visually ambitious but structurally incomplete — the SVGs render, the interactables are wired, yet the reveals lack content and the voice slides between lowercase intimacy and formal description without settling into either."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Empowered",
+          "name": "Seren"
+        },
+        "B": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "C": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

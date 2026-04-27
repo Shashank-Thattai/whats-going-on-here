@@ -79,3 +79,13 @@ the walker now discovers fixed landmarks scattered through the city—a statue i
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OBJECTS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 8 — The Vanquished (Orion)
+
+the sky above the sleeping city now carries the weight of the night in visible form — a wash of ink that deepens as the hours pass, a horizon that marks the reckoning without announcing it, so that the walker who lingers will feel in the quality of the dark itself that time is not an abstraction but a surface with an edge.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

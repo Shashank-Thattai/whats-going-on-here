@@ -49,6 +49,74 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+#sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40vh;
+  background: linear-gradient(to bottom, var(--paper), var(--paper));
+  pointer-events: none;
+  z-index: 10;
+  transition: background 100ms linear;
+}
+#sky.night-0 {
+  background: linear-gradient(to bottom, #f4f1e8 0%, #e8e5d8 100%);
+}
+#sky.night-1 {
+  background: linear-gradient(to bottom, #e8e5d8 0%, #d4cfc0 100%);
+}
+#sky.night-2 {
+  background: linear-gradient(to bottom, #d4cfc0 0%, #b8b0a0 100%);
+}
+#sky.night-3 {
+  background: linear-gradient(to bottom, #b8b0a0 0%, #8a8078 100%);
+}
+#sky.night-4 {
+  background: linear-gradient(to bottom, #8a8078 0%, #5a5050 100%);
+}
+#sky.night-5 {
+  background: linear-gradient(to bottom, #5a5050 0%, #3a3030 100%);
+}
+#sky.night-6 {
+  background: linear-gradient(to bottom, #3a3030 0%, #2a2028 100%);
+}
+#sky.night-7 {
+  background: linear-gradient(to bottom, #2a2028 0%, #1a1820 100%);
+}
+#sky.night-8 {
+  background: linear-gradient(to bottom, #1a1820 0%, #0e0e10 100%);
+}
+@media (prefers-color-scheme: dark) {
+  #sky.night-0 {
+    background: linear-gradient(to bottom, #0e0e10 0%, #1a1820 100%);
+  }
+  #sky.night-1 {
+    background: linear-gradient(to bottom, #1a1820 0%, #2a2028 100%);
+  }
+  #sky.night-2 {
+    background: linear-gradient(to bottom, #2a2028 0%, #3a3030 100%);
+  }
+  #sky.night-3 {
+    background: linear-gradient(to bottom, #3a3030 0%, #5a5050 100%);
+  }
+  #sky.night-4 {
+    background: linear-gradient(to bottom, #5a5050 0%, #8a8078 100%);
+  }
+  #sky.night-5 {
+    background: linear-gradient(to bottom, #8a8078 0%, #b8b0a0 100%);
+  }
+  #sky.night-6 {
+    background: linear-gradient(to bottom, #b8b0a0 0%, #d4cfc0 100%);
+  }
+  #sky.night-7 {
+    background: linear-gradient(to bottom, #d4cfc0 0%, #e8e5d8 100%);
+  }
+  #sky.night-8 {
+    background: linear-gradient(to bottom, #e8e5d8 0%, #f4f1e8 100%);
+  }
+}
+
 .landmark {
   position: absolute;
   pointer-events: auto;

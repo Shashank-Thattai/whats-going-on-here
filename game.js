@@ -50,6 +50,39 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const NIGHT_DURATION = 60000; // 60 seconds in milliseconds
+  const NIGHT_STAGES = 9; // 0 through 8
+  const sky = document.getElementById('sky');
+  let nightStartTime = null;
+  let nightEndTime = null;
+  let nightActive = true;
+
+  function initializeNight() {
+    nightStartTime = Date.now();
+    nightEndTime = nightStartTime + NIGHT_DURATION;
+  }
+
+  function updateSkyState() {
+    if (!nightActive) {
+      return;
+    }
+    const now = Date.now();
+    const elapsed = now - nightStartTime;
+    const progress = Math.min(elapsed / NIGHT_DURATION, 1);
+    const stageIndex = Math.floor(progress * (NIGHT_STAGES - 1));
+    const currentStage = Math.min(stageIndex, NIGHT_STAGES - 1);
+    
+    sky.className = 'night-' + currentStage;
+    
+    if (elapsed >= NIGHT_DURATION) {
+      endNight();
+    }
+  }
+
+  initializeNight();
+  setInterval(updateSkyState, 100);
+  updateSkyState();
+
   const LANDMARKS_KEY = 'cartographer_landmarks';
   const landmarks = JSON.parse(localStorage.getItem(LANDMARKS_KEY) || '{}');
   const landmarkData = [
@@ -117,15 +150,6 @@
       }
     });
   }
-
-  const originalWindowKeydown = window.addEventListener;
-  const keydownHandlers = [];
-  window.addEventListener = function(type, handler, options) {
-    if (type === 'keydown') {
-      keydownHandlers.push(handler);
-    }
-    return originalWindowKeydown.call(this, type, handler, options);
-  };
 
   window.addEventListener('keydown', (ev) => {
     if ((ev.key === 'm' || ev.key === 'M') && nightActive && !endScreen.classList.contains('active')) {
@@ -291,7 +315,6 @@
   const endScreen = document.getElementById('end-screen');
   const observationInput = document.getElementById('observation-input');
   const observationSubmit = document.getElementById('observation-submit');
-  let nightActive = true;
 
   function endNight() {
     nightActive = false;
@@ -360,38 +383,6 @@
 
   loadMarkedDoorways();
 
-  window.addEventListener('keydown', (ev) => {
-    if (ev.key === 'e' || ev.key === 'E') {
-      if (nearbyDoorId !== null) {
-        const door = doorways.find(d => d.id === nearbyDoorId);
-        if (door) {
-          saveMark(nearbyDoorId, door);
-          const doorEl = document.querySelector(`[data-doorway="${nearbyDoorId}"]`);
-          doorEl.classList.add('marked-doorway');
-          markPrompt.classList.remove('visible');
-        }
-      }
-    }
-  });
-
-  const originalCheckDoorways = checkDoorways;
-  checkDoorways = function() {
-    originalCheckDoorways();
-    nearbyDoorId = null;
-    doorways.forEach(door => {
-      const dx = x - door.x;
-      const dy = y - door.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < door.openDistance && !markedPlaces[door.id]) {
-        nearbyDoorId = door.id;
-        markPrompt.classList.add('visible');
-      }
-    });
-    if (nearbyDoorId === null) {
-      markPrompt.classList.remove('visible');
-    }
-  };
-
   const doorways = [
     { id: 0, x: 80, y: -20, room: "study", openDistance: 40 },
     { id: 1, x: 200, y: 120, room: "kitchen", openDistance: 40 },
@@ -401,6 +392,7 @@
   let activeRoom = null;
 
   function checkDoorways() {
+    nearbyDoorId = null;
     doorways.forEach(door => {
       const dx = x - door.x;
       const dy = y - door.y;
@@ -409,10 +401,17 @@
       
       if (distance < door.openDistance) {
         doorEl.classList.add("open");
+        if (!markedPlaces[door.id]) {
+          nearbyDoorId = door.id;
+          markPrompt.classList.add('visible');
+        }
       } else {
         doorEl.classList.remove("open");
       }
     });
+    if (nearbyDoorId === null) {
+      markPrompt.classList.remove('visible');
+    }
   }
 
   doorways.forEach(door => {
@@ -432,9 +431,23 @@
     });
   });
 
-  const originalPlace = place;
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'e' || ev.key === 'E') {
+      if (nearbyDoorId !== null) {
+        const door = doorways.find(d => d.id === nearbyDoorId);
+        if (door) {
+          saveMark(nearbyDoorId, door);
+          const doorEl = document.querySelector(`[data-doorway="${nearbyDoorId}"]`);
+          doorEl.classList.add('marked-doorway');
+          markPrompt.classList.remove('visible');
+        }
+      }
+    }
+  });
+
+  const originalPlace2 = place;
   place = function() {
-    originalPlace();
+    originalPlace2();
     checkDoorways();
   };
 
