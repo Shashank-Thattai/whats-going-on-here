@@ -99,3 +99,12 @@ the cat now walks the city in the manner of all things that are watched — it c
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OBJECTS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 10 — The Forgotten (Ash)
+
+a street walked twice now shivers on the third passage—the walker sees the pavement itself narrow or widen, a lamppost materialize where none stood before, the city learning from attention and correcting itself against the weight of being observed.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

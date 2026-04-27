@@ -50,6 +50,94 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+const STREET_MEMORY_KEY = 'cartographer_street_memory';
+  const streetMemory = JSON.parse(localStorage.getItem(STREET_MEMORY_KEY) || '{}');
+  let lastSegmentKey = null;
+  let segmentPassageCount = {};
+
+  function getSegmentKey(fromX, fromY, toX, toY) {
+    const roundX1 = Math.round(fromX / 16) * 16;
+    const roundY1 = Math.round(fromY / 16) * 16;
+    const roundX2 = Math.round(toX / 16) * 16;
+    const roundY2 = Math.round(toY / 16) * 16;
+    const minX = Math.min(roundX1, roundX2);
+    const maxX = Math.max(roundX1, roundX2);
+    const minY = Math.min(roundY1, roundY2);
+    const maxY = Math.max(roundY1, roundY2);
+    return minX + '_' + minY + '_' + maxX + '_' + maxY;
+  }
+
+  function recordSegmentPassage(fromX, fromY, toX, toY) {
+    const key = getSegmentKey(fromX, fromY, toX, toY);
+    if (key !== lastSegmentKey) {
+      if (!streetMemory[key]) {
+        streetMemory[key] = {
+          fromX: fromX,
+          fromY: fromY,
+          toX: toX,
+          toY: toY,
+          passages: 0,
+          mutations: []
+        };
+      }
+      streetMemory[key].passages += 1;
+      lastSegmentKey = key;
+      
+      if (streetMemory[key].passages === 3 && streetMemory[key].mutations.length === 0) {
+        generateMutation(key, streetMemory[key]);
+      }
+      localStorage.setItem(STREET_MEMORY_KEY, JSON.stringify(streetMemory));
+    }
+  }
+
+  function generateMutation(key, segment) {
+    const mutationTypes = ['lamppost', 'narrowing', 'widening', 'sealed'];
+    const mutationType = mutationTypes[Math.floor(Math.random() * mutationTypes.length)];
+    const midX = (segment.fromX + segment.toX) / 2;
+    const midY = (segment.fromY + segment.toY) / 2;
+    const offsetX = (Math.random() - 0.5) * 20;
+    const offsetY = (Math.random() - 0.5) * 20;
+    
+    segment.mutations.push({
+      type: mutationType,
+      x: midX + offsetX,
+      y: midY + offsetY,
+      timestamp: Date.now()
+    });
+    localStorage.setItem(STREET_MEMORY_KEY, JSON.stringify(streetMemory));
+    renderStreetMutations();
+  }
+
+  function renderStreetMutations() {
+    document.querySelectorAll('.street-mutation').forEach(el => el.remove());
+    Object.keys(streetMemory).forEach(key => {
+      const segment = streetMemory[key];
+      if (segment.passages >= 3 && segment.mutations.length > 0) {
+        segment.mutations.forEach(mutation => {
+          const mutEl = document.createElement('div');
+          mutEl.className = 'street-mutation ' + mutation.type;
+          mutEl.style.left = mutation.x + 'px';
+          mutEl.style.top = mutation.y + 'px';
+          world.appendChild(mutEl);
+        });
+      }
+    });
+  }
+
+  function loadStreetMemory() {
+    renderStreetMutations();
+  }
+
+  loadStreetMemory();
+
+  const originalPlaceMemory = place;
+  place = function() {
+    originalPlaceMemory();
+    if (lastRecordedPos) {
+      recordSegmentPassage(lastRecordedPos.x, lastRecordedPos.y, x, y);
+    }
+  };
+
   const CAT_KEY = 'cartographer_cat_session';
   const CAT_POSITIONS_KEY = 'cartographer_cat_positions';
   const cat = document.getElementById('cat');

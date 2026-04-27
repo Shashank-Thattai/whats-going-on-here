@@ -49,6 +49,48 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.street-memory {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.street-memory.visible {
+  opacity: 0.6;
+}
+.street-memory.unstable {
+  opacity: 0.8;
+  animation: shimmer 600ms ease-in-out;
+}
+@keyframes shimmer {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+.street-mutation {
+  position: absolute;
+  pointer-events: none;
+  border: 1px dashed var(--ink);
+  opacity: 0.5;
+}
+.street-mutation.lamppost {
+  width: 3px;
+  height: 16px;
+  background: var(--ink);
+  border: none;
+}
+.street-mutation.narrowing {
+  border-left: 2px solid var(--ink);
+  border-right: 2px solid var(--ink);
+  height: 40px;
+  opacity: 0.3;
+}
+.street-mutation.widening {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  width: 40px;
+  opacity: 0.3;
+}
+
 .cat {
   position: absolute;
   width: 12px;
