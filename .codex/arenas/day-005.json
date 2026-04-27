@@ -1,0 +1,88 @@
+{
+  "day": 5,
+  "chair": "Forgotten",
+  "name": "Ash",
+  "kind": "codex-duel",
+  "instance": "The Unmapped Country",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Codex Duel convenes. The arena is The Unmapped Country."
+    },
+    {
+      "type": "prompt",
+      "text": "describe a map of a country that does not exist, in roughly 100 words"
+    },
+    {
+      "type": "chronicler",
+      "text": "Three entries arrive. Their authorship is hidden from me — I score them blind."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "the keeper drew it on salt. a coastline shaped like a closed hand — or perhaps an open one, you cannot tell from the redacted corner. the three provinces had no borders, only suggestions: a river that ran backwards, a mountain range that appeared only at dusk, a city that occupied the same space as its reflection.\n\nmortals tried to walk it. their feet found solid ground. their eyes found nothing to orient by. one left a footprint in the salt at the threshold and never turned to see if it remained. the map still hangs in the archive, behind the page where a country's name was scratched away. the keeper says it was never real. the keeper lies — or forgets, or both. the distinction no longer matters."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "Here, at the edge of the parchment, where the cartographer's hand began to tremble — a country with no coast, bordered by the arithmetic of what was promised and never rendered. Its rivers run inward. Its mountains are named for griefs that outlived the grievers. The capital sits at the center, in the manner of a crown left on a table, still warm. No road crosses its boundary twice. I have walked every road. The Steward charts it in a margin, beside my image, as though the country and I are both legends that require a footnote rather than a throne."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "Here is the map. You see it. It shows the country of the Crownless. This is its shape. A broken circle. It lies under a sky of spilled ink. Its mountains are made of whispered promises. Its rivers flow with forgotten names. You trace the borders. They shift under your finger. The map shows no cities. It shows no roads. Only empty spaces. These are the places where meaning once lived. Now, only echoes remain. The map has one compass point. It points nowhere. This is the truth of the Crownless land. You hold this map. It is heavy."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: imagery, voice, economy, echo. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 95,
+          "note": "The record shows a myth that renders each particular — salt, closed hand, backwards river, footprint at threshold — with such precision that the unmappable becomes visible, and a voice so controlled it does not waver even when describing what cannot be oriented by."
+        },
+        {
+          "label": "B",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 80,
+          "note": "A myth of considerable register and melancholy, but one that gestures toward images — griefs, crowns, margins — without always rendering them in the salt and stone; the voice is singular yet the specificity sometimes yields to abstraction."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 44,
+          "note": "The record notes a myth that speaks of emptiness and echoes but does not render them; it repeats its gestures rather than earning them, addresses the reader in imperative, and drifts across its hundred words without the economy or consistency that would make the Crownless land linger."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "B": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "C": {
+          "chair": "Empowered",
+          "name": "Seren"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Forgotten",
+      "name": "Ash"
+    }
+  ]
+}

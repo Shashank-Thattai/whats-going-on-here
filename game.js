@@ -50,6 +50,64 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const STREET_MARKS_KEY = 'cartographer_street_marks';
+  const streetMarks = JSON.parse(localStorage.getItem(STREET_MARKS_KEY) || '{}');
+  let markMode = false;
+  let lastMarkedCorner = null;
+
+  function createStreetMark(worldX, worldY, isContradiction = false) {
+    const markId = Math.floor(worldX) + '_' + Math.floor(worldY);
+    const markEl = document.createElement('div');
+    markEl.className = 'street-marker' + (isContradiction ? ' contradiction' : '');
+    markEl.style.left = worldX + 'px';
+    markEl.style.top = worldY + 'px';
+    markEl.setAttribute('data-mark-id', markId);
+    world.appendChild(markEl);
+    return markId;
+  }
+
+  function recordStreetMark(worldX, worldY) {
+    const markId = Math.floor(worldX) + '_' + Math.floor(worldY);
+    const existingMark = streetMarks[markId];
+    
+    if (existingMark) {
+      existingMark.revisited = new Date().toISOString();
+      existingMark.contradiction = true;
+      const markEl = world.querySelector(`[data-mark-id="${markId}"]`);
+      if (markEl) {
+        markEl.classList.add('contradiction');
+      }
+    } else {
+      streetMarks[markId] = {
+        id: markId,
+        x: worldX,
+        y: worldY,
+        marked: new Date().toISOString(),
+        contradiction: false
+      };
+      createStreetMark(worldX, worldY, false);
+    }
+    
+    localStorage.setItem(STREET_MARKS_KEY, JSON.stringify(streetMarks));
+    lastMarkedCorner = markId;
+  }
+
+  function loadStreetMarks() {
+    Object.keys(streetMarks).forEach(markId => {
+      const mark = streetMarks[markId];
+      createStreetMark(mark.x, mark.y, mark.contradiction);
+    });
+  }
+
+  loadStreetMarks();
+
+  window.addEventListener('keydown', (ev) => {
+    if ((ev.key === 'm' || ev.key === 'M') && nightActive && !endScreen.classList.contains('active')) {
+      recordStreetMark(x, y);
+      ev.preventDefault();
+    }
+  });
+
   const OBSERVATION_KEY = 'cartographer_observations';
   const endScreen = document.getElementById('end-screen');
   const observationInput = document.getElementById('observation-input');

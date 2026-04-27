@@ -49,6 +49,32 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.street-marker {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  border-radius: 50%;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.street-marker.contradiction {
+  border: 2px dashed var(--ink);
+  background: transparent;
+  opacity: 0.8;
+}
+.street-marker-label {
+  position: absolute;
+  font-size: 10px;
+  color: var(--ink);
+  opacity: 0.5;
+  pointer-events: none;
+  white-space: nowrap;
+  margin-left: 12px;
+  margin-top: -4px;
+}
+
 .end-screen {
   position: fixed;
   inset: 0;

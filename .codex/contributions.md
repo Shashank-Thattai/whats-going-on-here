@@ -51,3 +51,12 @@ When the night ends and the walker closes their eyes, a threshold appears—a si
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 5 — The Forgotten (Ash)
+
+the walker now marks a corner or a threshold with *e*, and the ledger fills not with certainty but with a record of what was noticed — the street that bent left last night runs straight tonight, the alley that was wide has narrowed, and the note sits unretracted, a small wound that does not heal.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+
