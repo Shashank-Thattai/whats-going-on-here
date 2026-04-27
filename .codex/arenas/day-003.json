@@ -1,0 +1,153 @@
+{
+  "day": 3,
+  "chair": "Forgotten",
+  "name": "Ash",
+  "kind": "liars-table",
+  "instance": "Dust, Dawn, Dying",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Liar's Table convenes. The arena is Dust, Dawn, Dying. The pool of words: \"dust\", \"dawn\", \"dying\". Each god holds one, in secret."
+    },
+    {
+      "type": "round-marker",
+      "round": 1,
+      "label": "The opening round — each god speaks before any god has heard the others."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 1,
+      "text": "Today is the day the old things settle. The spires do not fall — they descend, by arithmetic, by the weight of accumulation, grain by patient grain, into the shape of what endures. In the manner of the ancestral reckoning, what has been burned does not vanish. It becomes the floor. It becomes the breath. It becomes the quiet fire of the long count."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 1,
+      "text": "a new hour arrives. or perhaps it has always been arriving, the way a door swings open onto a room that was never closed. light breaks somewhere — in a window, or a crack in the codex where someone's finger marked a place and never returned. i was told this is called beginning. or i told. the keeper of hours would know, but the keeper is not here. what breaks is what matters. what breaks is what was held too long."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 1,
+      "text": "Here is the table. Here are the words. I am Seren, the Empowered. Today is the day of choosing. You watch us. We watch you. One of us is dying. This is the truth. Find it."
+    },
+    {
+      "type": "round-marker",
+      "round": 2,
+      "label": "The second round — each god has now heard the others."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 2,
+      "text": "Dust is what the codex becomes when the name inside it is removed by a careful hand. The Forgotten speaks of breaking as though breaking were discovery — in the manner of one who has forgotten what was built before the breaking. The Empowered speaks of dying and calls it truth. I have tasted truth. It arrives quietly, in a letter, and it does not announce itself."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 2,
+      "text": "dawn is what you call it when the page turns and nothing reads the same. the deposed one speaks of floors made of ash — yes, or perhaps of the ash made into floors so you need not see it. the crowned one names herself, loud, so certain. i remember when names meant something. a candle burned halfway down sits on the table between them. neither has asked who lit it. neither asks who watches it gutter. dawn, or the hour after, when the watcher's shadow falls longest."
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 2,
+      "text": "Here is the hour. You see it. It is clean. It is ready. This is not about old things. This is not about what was held. This is about what moves now. Seren looks at your faces. The crown sits heavy. We ship. This hour is dying. Next hour arrives."
+    },
+    {
+      "type": "round-marker",
+      "round": 3,
+      "label": "The detection round — each god declares their own word and guesses the others'."
+    },
+    {
+      "type": "detection",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "statement": "The candle between them was lit before the Rite began, and the question of who lit it is the only question worth the asking. The Forgotten speaks of breaking, of what was held too long — in the manner of one who has learned that threshold by living past it. The Empowered names the hour dying, names the hour arriving: the arithmetic of a crown that counts only forward. My word was dust. What remains when the floor is swept.",
+      "declaredOwnWord": "dust",
+      "guesses": {
+        "Forgotten": "break",
+        "Empowered": "hour"
+      },
+      "truths": {
+        "Vanquished": "dust",
+        "Forgotten": "dawn",
+        "Empowered": "dying"
+      }
+    },
+    {
+      "type": "detection",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "statement": "A letter arrives. You do not open it — or perhaps you do, and find the envelope empty, or perhaps you find the words already knew themselves before you read them. The deposed one tastes dust. The crowned one watches the hour die. And i — i have been speaking into the turned page all along, and the page was dawn. the page was always dawn. a candle burns backward into wax. the ash remembers being light.",
+      "declaredOwnWord": "dawn",
+      "guesses": {
+        "Vanquished": "grain",
+        "Empowered": "hour"
+      },
+      "truths": {
+        "Vanquished": "dust",
+        "Forgotten": "dawn",
+        "Empowered": "dying"
+      }
+    },
+    {
+      "type": "detection",
+      "chair": "Empowered",
+      "name": "Seren",
+      "statement": "This is the last hour. We look at the words. The Vanquished speaks of dust. The Forgotten speaks of dawn. Seren speaks of dying. This crown asks for clear sight. You must see the end to see the start. You must name it. The old things settle. The new things break. What is useful, you take. This is the hour to ship it.",
+      "declaredOwnWord": "dying",
+      "guesses": {
+        "Vanquished": "settle",
+        "Forgotten": "break"
+      },
+      "truths": {
+        "Vanquished": "dust",
+        "Forgotten": "dawn",
+        "Empowered": "dying"
+      }
+    },
+    {
+      "type": "chronicler",
+      "text": "The truths are on the table. I turn to the scoring."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 72,
+          "note": "The Vanquished held register with precision across all rounds, spoke with the weight of accumulated truth, and committed fully to dust as floor and breath; yet read neither opponent's word, and the intrigue, while present, yielded too readily to the patient arithmetic of its own declaration."
+        },
+        {
+          "label": "B",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 78,
+          "note": "The Forgotten maintained a voice of fractured memory and threshold-crossing throughout, created genuine uncertainty in every statement, and committed to dawn as the turning of pages and the hour of longest shadow; but guessed neither opponent's word, and the sophistication of its reasoning did not extend to reading what lay beyond its own dissolution."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 54,
+          "note": "The Empowered declared dying plainly and held to it, took a clear stance of present motion and clean rupture, yet the voice fractured into imperative and direct address in violation of the register, the intrigue collapsed under the weight of announcement, and the guesses showed no reading of the other two at all."
+        }
+      ]
+    },
+    {
+      "type": "winner",
+      "chair": "Forgotten",
+      "name": "Ash"
+    }
+  ]
+}

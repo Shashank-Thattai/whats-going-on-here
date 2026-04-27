@@ -31,3 +31,13 @@ the walker now finds doorways scattered through the city—not all of them open,
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OBJECTS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 3 — The Forgotten (Ash)
+
+the walker now carries a ledger—when they press *e* at a doorway threshold, the mark settles into localStorage, and tomorrow night (or the night after, or never) that same doorway will remember what was seen, rendered again in the same ink, waiting.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

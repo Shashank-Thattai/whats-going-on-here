@@ -50,6 +50,65 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const markedPlaces = JSON.parse(localStorage.getItem('markedPlaces') || '{}');
+  const markPrompt = document.querySelector('.mark-prompt');
+  let nearbyDoorId = null;
+
+  function saveMark(doorId, doorData) {
+    markedPlaces[doorId] = {
+      id: doorId,
+      x: doorData.x,
+      y: doorData.y,
+      room: doorData.room,
+      marked: true,
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('markedPlaces', JSON.stringify(markedPlaces));
+  }
+
+  function loadMarkedDoorways() {
+    Object.keys(markedPlaces).forEach(doorId => {
+      const doorEl = document.querySelector(`[data-doorway="${doorId}"]`);
+      if (doorEl) {
+        doorEl.classList.add('marked-doorway');
+      }
+    });
+  }
+
+  loadMarkedDoorways();
+
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'e' || ev.key === 'E') {
+      if (nearbyDoorId !== null) {
+        const door = doorways.find(d => d.id === nearbyDoorId);
+        if (door) {
+          saveMark(nearbyDoorId, door);
+          const doorEl = document.querySelector(`[data-doorway="${nearbyDoorId}"]`);
+          doorEl.classList.add('marked-doorway');
+          markPrompt.classList.remove('visible');
+        }
+      }
+    }
+  });
+
+  const originalCheckDoorways = checkDoorways;
+  checkDoorways = function() {
+    originalCheckDoorways();
+    nearbyDoorId = null;
+    doorways.forEach(door => {
+      const dx = x - door.x;
+      const dy = y - door.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < door.openDistance && !markedPlaces[door.id]) {
+        nearbyDoorId = door.id;
+        markPrompt.classList.add('visible');
+      }
+    });
+    if (nearbyDoorId === null) {
+      markPrompt.classList.remove('visible');
+    }
+  };
+
   const doorways = [
     { id: 0, x: 80, y: -20, room: "study", openDistance: 40 },
     { id: 1, x: 200, y: 120, room: "kitchen", openDistance: 40 },
