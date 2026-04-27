@@ -108,3 +108,13 @@ a street walked twice now shivers on the third passage—the walker sees the pav
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 11 — The Forgotten (Ash)
+
+the walker now presses *r* at any corner to capture its state—a snapshot of the city as it stands—and returning to that place on a future night reveals the previous version as a faint overlay, so that two versions of the same street can be held in the mind at once, and the walker may ask whether the city shifts or whether they are simply learning to see differently.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

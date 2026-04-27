@@ -50,6 +50,176 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+const LOCATION_SNAPSHOTS_KEY = 'cartographer_location_snapshots';
+  const locationSnapshots = JSON.parse(localStorage.getItem(LOCATION_SNAPSHOTS_KEY) || '{}');
+  const snapshotLedger = document.getElementById('snapshot-ledger');
+  const snapshotLedgerToggle = document.getElementById('snapshot-ledger-toggle');
+  const snapshotLedgerContent = document.getElementById('snapshot-ledger-content');
+  let currentLedgerTab = 'all';
+  let renderedOverlays = {};
+
+  function getLocationKey(worldX, worldY) {
+    const gridX = Math.round(worldX / 40) * 40;
+    const gridY = Math.round(worldY / 40) * 40;
+    return gridX + '_' + gridY;
+  }
+
+  function captureLocationSnapshot(worldX, worldY) {
+    const key = getLocationKey(worldX, worldY);
+    const timestamp = new Date().toISOString();
+    
+    if (!locationSnapshots[key]) {
+      locationSnapshots[key] = {
+        id: key,
+        x: worldX,
+        y: worldY,
+        snapshots: []
+      };
+    }
+    
+    const snapshot = {
+      timestamp: timestamp,
+      skyStage: sky.className.replace('night-', ''),
+      catDistance: catFollowDistance,
+      nearbyLandmarks: landmarkData.filter(lm => {
+        const dx = worldX - lm.x;
+        const dy = worldY - lm.y;
+        return Math.sqrt(dx * dx + dy * dy) < 100;
+      }).map(lm => lm.name),
+      nearbyMarks: Object.keys(streetMarks).filter(markId => {
+        const mark = streetMarks[markId];
+        const dx = worldX - mark.x;
+        const dy = worldY - mark.y;
+        return Math.sqrt(dx * dx + dy * dy) < 100;
+      }).length
+    };
+    
+    locationSnapshots[key].snapshots.push(snapshot);
+    localStorage.setItem(LOCATION_SNAPSHOTS_KEY, JSON.stringify(locationSnapshots));
+    
+    renderSnapshotOverlay(key);
+    updateLedger();
+  }
+
+  function renderSnapshotOverlay(locationKey) {
+    const location = locationSnapshots[locationKey];
+    if (!location || location.snapshots.length < 2) {
+      return;
+    }
+    
+    const previousSnapshot = location.snapshots[location.snapshots.length - 2];
+    const currentSnapshot = location.snapshots[location.snapshots.length - 1];
+    
+    const overlayId = 'overlay_' + locationKey;
+    let overlay = document.getElementById(overlayId);
+    
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = overlayId;
+      overlay.className = 'location-snapshot';
+      overlay.setAttribute('data-location-key', locationKey);
+      world.appendChild(overlay);
+    }
+    
+    const changeCount = (previousSnapshot.skyStage !== currentSnapshot.skyStage ? 1 : 0) +
+                        (previousSnapshot.catDistance !== currentSnapshot.catDistance ? 1 : 0) +
+                        (previousSnapshot.nearbyLandmarks.length !== currentSnapshot.nearbyLandmarks.length ? 1 : 0);
+    
+    overlay.style.left = location.x + 'px';
+    overlay.style.top = location.y + 'px';
+    overlay.style.width = '60px';
+    overlay.style.height = '60px';
+    overlay.setAttribute('data-changes', changeCount);
+    overlay.title = 'snapshot from ' + previousSnapshot.timestamp.split('T')[1].slice(0, 5) + ' — ' + changeCount + ' differences';
+    
+    renderedOverlays[overlayId] = true;
+  }
+
+  function updateLedger() {
+    const entries = Object.keys(locationSnapshots)
+      .map(key => ({
+        key: key,
+        location: locationSnapshots[key],
+        changeCount: calculateLocationChanges(locationSnapshots[key])
+      }))
+      .filter(e => e.location.snapshots.length > 1);
+    
+    let displayEntries = entries;
+    if (currentLedgerTab === 'changed') {
+      displayEntries = entries.sort((a, b) => b.changeCount - a.changeCount).slice(0, 10);
+    } else {
+      displayEntries = entries.sort((a, b) => new Date(b.location.snapshots[b.location.snapshots.length - 1].timestamp) - new Date(a.location.snapshots[a.location.snapshots.length - 1].timestamp));
+    }
+    
+    snapshotLedgerContent.innerHTML = '';
+    displayEntries.forEach(entry => {
+      const entryEl = document.createElement('div');
+      entryEl.className = 'snapshot-entry';
+      const locStr = entry.location.x.toFixed(0) + ', ' + entry.location.y.toFixed(0);
+      const snapCount = entry.location.snapshots.length;
+      entryEl.innerHTML = '<div class="snapshot-entry-location">(' + locStr + ')</div>' +
+                          '<div class="snapshot-entry-changes">' +
+                          '<span class="snapshot-entry-change-count">' + entry.changeCount + '</span> differences across ' + snapCount + ' visits</div>';
+      snapshotLedgerContent.appendChild(entryEl);
+    });
+  }
+
+  function calculateLocationChanges(location) {
+    if (location.snapshots.length < 2) return 0;
+    let totalChanges = 0;
+    for (let i = 1; i < location.snapshots.length; i++) {
+      const prev = location.snapshots[i - 1];
+      const curr = location.snapshots[i];
+      if (prev.skyStage !== curr.skyStage) totalChanges++;
+      if (Math.abs(prev.catDistance - curr.catDistance) > 20) totalChanges++;
+      if (prev.nearbyLandmarks.length !== curr.nearbyLandmarks.length) totalChanges++;
+      if (prev.nearbyMarks !== curr.nearbyMarks) totalChanges++;
+    }
+    return totalChanges;
+  }
+
+  window.addEventListener('keydown', (ev) => {
+    if ((ev.key === 'r' || ev.key === 'R') && nightActive && !endScreen.classList.contains('active')) {
+      captureLocationSnapshot(x, y);
+      ev.preventDefault();
+    }
+    if ((ev.key === 'l' || ev.key === 'L') && !endScreen.classList.contains('active')) {
+      snapshotLedger.classList.toggle('open');
+      ev.preventDefault();
+    }
+  });
+
+  document.querySelectorAll('.snapshot-ledger-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.snapshot-ledger-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentLedgerTab = tab.getAttribute('data-tab');
+      updateLedger();
+    });
+  });
+
+  snapshotLedgerToggle.addEventListener('click', () => {
+    snapshotLedger.classList.toggle('open');
+  });
+
+  const originalPlaceSnapshots = place;
+  place = function() {
+    originalPlaceSnapshots();
+    Object.keys(renderedOverlays).forEach(overlayId => {
+      const overlay = document.getElementById(overlayId);
+      if (overlay) {
+        const dx = x - parseFloat(overlay.style.left);
+        const dy = y - parseFloat(overlay.style.top);
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 120) {
+          overlay.classList.add('visible');
+        } else {
+          overlay.classList.remove('visible');
+        }
+      }
+    });
+  };
+
 const STREET_MEMORY_KEY = 'cartographer_street_memory';
   const streetMemory = JSON.parse(localStorage.getItem(STREET_MEMORY_KEY) || '{}');
   let lastSegmentKey = null;

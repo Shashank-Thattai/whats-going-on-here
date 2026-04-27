@@ -1,0 +1,88 @@
+{
+  "day": 11,
+  "chair": "Forgotten",
+  "name": "Ash",
+  "kind": "unsigned-letter",
+  "instance": "The Letter of Today",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Unsigned Letter convenes. The form is The Letter of Today."
+    },
+    {
+      "type": "prompt",
+      "text": "A plain letter, unsigned, arguing for today's contribution. The judge reads three such letters and picks the one most worth shipping."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three letters arrive. They bear no names. Their authors wrote in a tongue not their own for this single task — so that the judging falls on the substance of what is proposed, and nothing else."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "The walker has been building a record of the city's inconsistencies—streets that shift, landmarks that persist—but has no way to understand the pattern beneath them. A memory system would let the player track which changes occur in which locations across multiple nights, revealing whether the city transforms randomly or according to some internal logic.\n\nThe mechanic: pressing *r* at any location saves its current state (street width, nearby objects, sky color). Returning to that location on a future night displays the previous state as a faint overlay, allowing direct comparison. The ledger gains a new tab showing all tracked locations and their variations, sortable by how dramatically they have changed.\n\nThis matters now because the game has spent ten days accumulating sensory detail and player agency. The walker has learned to notice. They are ready to ask whether their noticing reveals something true about the city, or whether they are simply recording chaos. That question—whether attention discovers meaning or imposes it—is the game's actual subject, and it cannot emerge until the player can hold two versions of the same place in mind simultaneously."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "The player will now find a map button on the game interface. Pressing this button will open a simple, abstract map of the city. Each street the player has walked will be visible as a line. Doorways and fixed landmarks that have been marked will appear as small, distinct icons. This map will update dynamically as the player explores, providing a cumulative visual record of their journey through the shifting city.\n\nThis feature is urgent because it directly enhances the core premise of cartography. It provides the player with a tangible record of their observations, making the act of mapping immediately visible and reinforcing the theme of memory and attention in a concrete way. It offers a practical tool for navigation and reflection that the game currently lacks."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "The city has grown rich in what it offers the walker — doorways, landmarks, a cat, a ledger filling with observations that contradict each other. What it does not yet offer is sound.\n\nStarting tonight, the walker will hear the city. Not music, not score — ambient audio generated from position and context: the low resonance of an empty plaza, the closer acoustics of a narrow alley, a faint dripping when rain-marked streets appear, silence that is distinctly indoor silence when a doorway is entered. The audio responds to the same variables already tracked in the game state, so no new data structures are needed. A small, looping Web Audio API oscillator graph, shaped by proximity to walls and open sky, produces the texture without external files.\n\nThe urgency is this: the city is currently experienced through one sense only, and the ledger entries the player writes are richer when more than one sense was engaged during the walk — adding audio now, before the city grows more complex, means every future contribution lands in a space that already feels inhabited rather than illustrated.\n\nNo new keys. No new UI. The player simply notices that the city now has a different quality of quiet."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: clarity, consequence, fit, urgency. Each out of twenty-five. Voice is not weighed here — I am forbidden to recognize it."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 93,
+          "note": "The letter names a precise mechanic (*r* to save, overlay to compare) that directly serves the game's philosophical center—whether attention discovers or imposes meaning—and the codex finds it ready to be built."
+        },
+        {
+          "label": "B",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 73,
+          "note": "The letter proposes a clear, buildable feature that reinforces the cartography theme, yet it ornaments rather than transforms; the walker already holds the city in memory, and a visual map may diminish the tender work of reconstruction that precedes it."
+        },
+        {
+          "label": "C",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 89,
+          "note": "The letter argues for sensory depth at a threshold moment, when the city is still being learned, and the Web Audio approach respects the game's existing architecture; yet the urgency claim rests on a future state not yet observable in the record."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "B": {
+          "chair": "Empowered",
+          "name": "Seren"
+        },
+        "C": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Forgotten",
+      "name": "Ash"
+    }
+  ]
+}
