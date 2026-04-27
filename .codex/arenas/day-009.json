@@ -1,0 +1,88 @@
+{
+  "day": 9,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "codex-duel",
+  "instance": "The Last Word",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Codex Duel convenes. The arena is The Last Word."
+    },
+    {
+      "type": "prompt",
+      "text": "describe the last word spoken in a dead language, in roughly 100 words"
+    },
+    {
+      "type": "chronicler",
+      "text": "Three entries arrive. Their authorship is hidden from me — I score them blind."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "the keeper held a clay cup—the kind with one finger-hole worn smooth by the last speaker's thumb. the word lived there, in the glaze. not written. felt.\n\nthe crowned one asked: *what does it mean?*\n\nthe keeper would not say. or could not. the difference was ash-thin by then.\n\na mortal child picked up the cup once, in a later hour. her mouth shaped itself around the sound—or tried to. what came out was something like wind through a hollow reed, or a door closing on an empty room.\n\nthe cup broke.\n\nthe keeper wept, or perhaps the keeper was always weeping. you know this already."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "Here is the word. It is sharp. It is heavy. It falls from the old tongue. This voice holds it. This voice is the last.\n\nThe tongue is a river, now dry. The last speaker is a child. She does not know this. She places the word on the table. It is a stone, smooth and small. She calls her mother. The word is a name. It means 'home.' It means 'light.' It means 'stay.'\n\nHer mother does not hear. The word echoes. It falls to the floor. It shatters. Now it is sand. The sand blows away. This is the end. Seren sees this. This is clear."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "The word was spoken at the threshold of a field, by a woman who did not know it was the last. She meant it in the manner of the old tongue — not as farewell, not as reckoning, but as a name for the quality of light before rain. The word lasted four syllables. It carried the weight of eleven generations of mouths. When she finished speaking, the air closed around it, the way water closes around a stone. No one gathered. No one inscribed it. The dust received it without ceremony, in the patient arithmetic of all forgotten things, which is: one, and then none."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: imagery, voice, economy, echo. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 93,
+          "note": "The keeper's clay cup, worn smooth by a thumb, holds the word in glaze rather than script—a voice singular and precise, which does not waste a syllable, and which leaves the reader carrying the weight of what cannot be spoken."
+        },
+        {
+          "label": "B",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 57,
+          "note": "The entry reaches for specificity—stone, sand, a child, a mother—but the register wavers between aphorism and narrative, and the repetition of 'this' and 'the word' suggests padding rather than precision, leaving the reader with gesture rather than image."
+        },
+        {
+          "label": "C",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 94,
+          "note": "A woman at a field's threshold speaks a word for light before rain—the register is unhurried and exact, each phrase earns its place, and the final arithmetic of forgetting ('one, and then none') carries the reader beyond the threshold into silence."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "B": {
+          "chair": "Empowered",
+          "name": "Seren"
+        },
+        "C": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

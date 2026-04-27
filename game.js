@@ -50,6 +50,98 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const CAT_KEY = 'cartographer_cat_session';
+  const CAT_POSITIONS_KEY = 'cartographer_cat_positions';
+  const cat = document.getElementById('cat');
+  let catX = 0;
+  let catY = 0;
+  let catVelX = 0;
+  let catVelY = 0;
+  let catWaitTimer = 0;
+  let catWaitDuration = 0;
+  let catPathMemory = JSON.parse(localStorage.getItem(CAT_POSITIONS_KEY) || '[]');
+  let catSessionId = localStorage.getItem(CAT_KEY);
+  let catFollowDistance = 0;
+  let catWasFollowed = false;
+
+  function initializeCat() {
+    const now = new Date().toISOString().split('T')[0];
+    if (catSessionId !== now) {
+      catSessionId = now;
+      localStorage.setItem(CAT_KEY, catSessionId);
+      catPathMemory = [];
+      catX = Math.random() * 400 - 200;
+      catY = Math.random() * 400 - 200;
+      catWasFollowed = false;
+    } else {
+      catX = 0;
+      catY = 0;
+    }
+    catWaitTimer = 0;
+    catWaitDuration = 120 + Math.random() * 240;
+    updateCatVisuals();
+  }
+
+  function updateCatVisuals() {
+    cat.style.left = catX + 'px';
+    cat.style.top = catY + 'px';
+  }
+
+  function catDecideMovement() {
+    if (catWaitTimer > 0) {
+      catWaitTimer -= 1;
+      catVelX = 0;
+      catVelY = 0;
+      return;
+    }
+    const rand = Math.random();
+    if (rand < 0.7) {
+      const angle = Math.random() * Math.PI * 2;
+      catVelX = Math.cos(angle) * 0.8;
+      catVelY = Math.sin(angle) * 0.8;
+      catWaitDuration = 80 + Math.random() * 160;
+    } else {
+      catVelX = 0;
+      catVelY = 0;
+      catWaitDuration = 200 + Math.random() * 400;
+    }
+    catWaitTimer = catWaitDuration;
+  }
+
+  function updateCatPosition() {
+    catX += catVelX;
+    catY += catVelY;
+    const dx = x - catX;
+    const dy = y - catY;
+    catFollowDistance = Math.sqrt(dx * dx + dy * dy);
+    if (catFollowDistance < 80) {
+      catWasFollowed = true;
+    }
+    catPathMemory.push({
+      x: Math.round(catX),
+      y: Math.round(catY),
+      timestamp: Date.now()
+    });
+    if (catPathMemory.length > 200) {
+      catPathMemory.shift();
+    }
+    localStorage.setItem(CAT_POSITIONS_KEY, JSON.stringify(catPathMemory));
+    updateCatVisuals();
+  }
+
+  initializeCat();
+  setInterval(() => {
+    if (nightActive) {
+      catDecideMovement();
+      updateCatPosition();
+    }
+  }, 100);
+
+  const originalPlaceCat = place;
+  place = function() {
+    originalPlaceCat();
+  };
+
   const NIGHT_DURATION = 60000; // 60 seconds in milliseconds
   const NIGHT_STAGES = 9; // 0 through 8
   const sky = document.getElementById('sky');

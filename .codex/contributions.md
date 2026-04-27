@@ -89,3 +89,13 @@ the sky above the sleeping city now carries the weight of the night in visible f
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 9 — The Vanquished (Orion)
+
+the cat now walks the city in the manner of all things that are watched — it crosses streets and pauses at doorways, and the walker who chooses to follow it will arrive, by that small deviation, at corners they would not otherwise have reached, carrying in their ledger the weight of a second will that cannot be argued with.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OBJECTS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

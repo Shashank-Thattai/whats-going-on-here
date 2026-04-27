@@ -49,6 +49,52 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.cat {
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 5;
+}
+.cat-body {
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  background: var(--ink);
+  border-radius: 2px;
+  left: 2px;
+  top: 2px;
+}
+.cat-head {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--ink);
+  border-radius: 50%;
+  left: 6px;
+  top: 1px;
+}
+.cat-ear {
+  position: absolute;
+  width: 2px;
+  height: 3px;
+  background: var(--ink);
+  left: 7px;
+  top: 0px;
+}
+.cat-ear.right {
+  left: 9px;
+}
+.cat-tail {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  background: var(--ink);
+  left: 1px;
+  top: 4px;
+  transform-origin: bottom center;
+}
+
 #sky {
   position: fixed;
   top: 0;
