@@ -50,4 +50,50 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const doorways = [
+    { id: 0, x: 80, y: -20, room: "study", openDistance: 40 },
+    { id: 1, x: 200, y: 120, room: "kitchen", openDistance: 40 },
+    { id: 2, x: -150, y: 80, room: "chamber", openDistance: 40 }
+  ];
+
+  let activeRoom = null;
+
+  function checkDoorways() {
+    doorways.forEach(door => {
+      const dx = x - door.x;
+      const dy = y - door.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const doorEl = document.querySelector(`[data-doorway="${door.id}"]`);
+      
+      if (distance < door.openDistance) {
+        doorEl.classList.add("open");
+      } else {
+        doorEl.classList.remove("open");
+      }
+    });
+  }
+
+  doorways.forEach(door => {
+    const doorEl = document.querySelector(`[data-doorway="${door.id}"]`);
+    doorEl.addEventListener("click", () => {
+      if (doorEl.classList.contains("open")) {
+        activeRoom = door.room;
+        document.getElementById(`room-${door.room}`).classList.add("active");
+      }
+    });
+  });
+
+  document.querySelectorAll(".room-exit").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".room").forEach(r => r.classList.remove("active"));
+      activeRoom = null;
+    });
+  });
+
+  const originalPlace = place;
+  place = function() {
+    originalPlace();
+    checkDoorways();
+  };
+
 })();

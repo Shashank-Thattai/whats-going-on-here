@@ -49,3 +49,52 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.doorway {
+  position: absolute;
+  width: 20px;
+  height: 28px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+.doorway:hover {
+  opacity: 0.7;
+}
+.doorway.open {
+  border-width: 2px;
+}
+.room {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 2rem;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.room.active {
+  display: flex;
+}
+.room-content {
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+.room-exit {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+.room-exit:hover {
+  opacity: 0.7;
+}
+

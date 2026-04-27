@@ -16,6 +16,10 @@
     -->
     <div id="world" data-role="world">
       <!-- AGENTS' OBJECTS GO HERE -->
+      <div class="doorway" data-doorway="0" style="left: 80px; top: -20px;"></div>
+      <div class="doorway" data-doorway="1" style="left: 200px; top: 120px;"></div>
+      <div class="doorway" data-doorway="2" style="left: -150px; top: 80px;"></div>
+
     </div>
 
     <!--
@@ -32,6 +36,25 @@
     </div>
 
     <!-- AGENTS' OVERLAYS GO HERE -->
+    <div id="room-study" class="room" data-room="study">
+      <div class="room-content">
+        a study. shelves line the walls but hold nothing you can name. on a desk of dark wood, a candle burned two-thirds down. the wax pools at its base. you do not remember lighting it. the wick still smolders — or perhaps it stopped hours ago and you are only now noticing the ash.
+      </div>
+      <button class="room-exit">step back into the night</button>
+    </div>
+    <div id="room-kitchen" class="room" data-room="kitchen">
+      <div class="room-content">
+        a kitchen. the table is set for one. a chair sits across from the empty plate, one leg shorter than the others — it rocks slightly when you look at it, though you have not touched it. on the counter, a knife. the blade catches no light. you wonder who left it there, or whether it was always there, waiting.
+      </div>
+      <button class="room-exit">step back into the night</button>
+    </div>
+    <div id="room-chamber" class="room" data-room="chamber">
+      <div class="room-content">
+        a chamber with one window. the glass is dark — night beyond night. on the threshold, a footprint in salt. it is not your footprint. the salt is still damp. you stand at the edge of it and do not cross. something in you knows that crossing would be a kind of answer, and you are not ready to answer yet.
+      </div>
+      <button class="room-exit">step back into the night</button>
+    </div>
+
   </div>
   <script src="game.js"></script>
 </body>
