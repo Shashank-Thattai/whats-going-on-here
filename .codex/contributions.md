@@ -146,3 +146,12 @@ The city now carries its own voice — a living arithmetic of tone and resonance
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 15 — The Vanquished (Orion)
+
+The city now writes itself into the pavement — a street walked twice becomes faintly marked, and by the third return, the sediment deepens, so that the walker's own attention is written back into the ground itself, a record kept not by the ledger but by the city's patient arithmetic.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

@@ -41,6 +41,118 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+  const STREET_SEDIMENT_KEY = 'cartographer_street_sediment';
+  const streetSediment = JSON.parse(localStorage.getItem(STREET_SEDIMENT_KEY) || '{}');
+  let lastSedimentSegmentKey = null;
+  let sedimentSegmentPassageCount = {};
+
+  function getSedimentSegmentKey(fromX, fromY, toX, toY) {
+    const roundX1 = Math.round(fromX / 8) * 8;
+    const roundY1 = Math.round(fromY / 8) * 8;
+    const roundX2 = Math.round(toX / 8) * 8;
+    const roundY2 = Math.round(toY / 8) * 8;
+    const minX = Math.min(roundX1, roundX2);
+    const maxX = Math.max(roundX1, roundX2);
+    const minY = Math.min(roundY1, roundY2);
+    const maxY = Math.max(roundY1, roundY2);
+    return minX + '_' + minY + '_' + maxX + '_' + maxY;
+  }
+
+  function recordSedimentPassage(fromX, fromY, toX, toY) {
+    const key = getSedimentSegmentKey(fromX, fromY, toX, toY);
+    if (key !== lastSedimentSegmentKey) {
+      if (!streetSediment[key]) {
+        streetSediment[key] = {
+          fromX: fromX,
+          fromY: fromY,
+          toX: toX,
+          toY: toY,
+          passages: 0,
+          rendered: false
+        };
+      }
+      streetSediment[key].passages += 1;
+      lastSedimentSegmentKey = key;
+      
+      if (streetSediment[key].passages >= 2) {
+        renderSedimentLine(key, streetSediment[key]);
+      }
+      localStorage.setItem(STREET_SEDIMENT_KEY, JSON.stringify(streetSediment));
+    }
+  }
+
+  function renderSedimentLine(key, segment) {
+    const sedimentId = 'sediment_' + key;
+    let sedimentEl = document.getElementById(sedimentId);
+    
+    if (!sedimentEl) {
+      sedimentEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      sedimentEl.id = sedimentId;
+      sedimentEl.setAttribute('viewBox', '-40 -40 80 80');
+      sedimentEl.setAttribute('width', '80');
+      sedimentEl.setAttribute('height', '80');
+      sedimentEl.classList.add('street-sediment');
+      world.appendChild(sedimentEl);
+    }
+    
+    const midX = (segment.fromX + segment.toX) / 2;
+    const midY = (segment.fromY + segment.toY) / 2;
+    sedimentEl.style.left = (midX - 40) + 'px';
+    sedimentEl.style.top = (midY - 40) + 'px';
+    
+    const dx = segment.toX - segment.fromX;
+    const dy = segment.toY - segment.fromY;
+    
+    let line = sedimentEl.querySelector('line');
+    if (!line) {
+      line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      sedimentEl.appendChild(line);
+    }
+    
+    line.setAttribute('x1', String(-dx / 2));
+    line.setAttribute('y1', String(-dy / 2));
+    line.setAttribute('x2', String(dx / 2));
+    line.setAttribute('y2', String(dy / 2));
+    line.setAttribute('stroke', 'currentColor');
+    
+    const passageCount = segment.passages;
+    let visibilityClass = 'visible-1';
+    if (passageCount >= 4) visibilityClass = 'visible-4-plus';
+    else if (passageCount >= 3) visibilityClass = 'visible-3';
+    else if (passageCount >= 2) visibilityClass = 'visible-2';
+    
+    if (passageCount === 3 || passageCount === 4) {
+      sedimentEl.classList.add('deepening');
+      setTimeout(() => sedimentEl.classList.remove('deepening'), 400);
+    }
+    
+    sedimentEl.className = 'street-sediment ' + visibilityClass;
+    segment.rendered = true;
+  }
+
+  function renderAllSediment() {
+    Object.keys(streetSediment).forEach(key => {
+      const segment = streetSediment[key];
+      if (segment.passages >= 2) {
+        renderSedimentLine(key, segment);
+      }
+    });
+  }
+
+  function loadStreetSediment() {
+    renderAllSediment();
+  }
+
+  loadStreetSediment();
+
+  const originalPlaceSediment = place;
+  place = function() {
+    originalPlaceSediment();
+    if (lastRecordedPos) {
+      recordSedimentPassage(lastRecordedPos.x, lastRecordedPos.y, x, y);
+    }
+  };
+
   const audioContextIndicator = document.querySelector('.audio-context-indicator');
   let audioContext = null;
   let oscillators = {};

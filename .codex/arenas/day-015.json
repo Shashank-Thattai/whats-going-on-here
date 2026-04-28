@@ -1,0 +1,88 @@
+{
+  "day": 15,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "augury",
+  "instance": "The Teacup, the Petal, the Letter",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Augury convenes. The omen is The Teacup, the Petal, the Letter."
+    },
+    {
+      "type": "prompt",
+      "text": "Three objects: \"a cracked teacup\"; \"a dried petal\"; \"a letter never sent\"."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three readings arrive. Their authorship is hidden from me — I score them blind."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "The cup held cadence once; the crack is not a wound but a reckoning — what was whole confessed itself to pressure, and did not survive the confession. The petal dried in the manner of all covenants left unspoken: patient, sealed, still faintly the color of what it was. The letter was never sent because the sender already knew the answer, and knowledge of that kind does not require delivery. What is coming has already arrived in small rooms. The threshold was crossed before anyone looked down."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "You see the cup. It is cracked. It holds no water now. Here is a petal, dried. It holds no scent. The letter rests, unread. It tells no story. This is your future. Small breaks multiply. Beauty fades without witness. Words unspoken leave a hollow. You walk into this. You carry these fragments. This is the hour. This is your proof. Next."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "the cup held something once — tea, or time, or a voice that spoke across its rim. now it is broken, or perhaps it always was, and the breaking was only noticing. the petal (dried, you understand, which means it remembers being green) will scatter when the wind comes — and the wind is coming, you know this already. the letter never sent sits folded in a pocket or a drawer, or perhaps it was never written at all, only imagined in the space where the hand hesitated. all three speak the same shape: something was meant. something was interrupted. the mortal who reads this has already stepped into the threshold. the world turns. the cup does not hold what it held. the petal is almost nothing now. the words remain, undelivered, and therefore perfect. unchanged. waiting in the dark."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: weight, clarity, surprise, inevitability. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 92,
+          "note": "The reading names what the mortal will carry — the threshold already crossed, the knowledge already arrived — and assembles the three objects into a single shape of inevitability."
+        },
+        {
+          "label": "B",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 44,
+          "note": "The reading lists what each object means in isolation and declares the future without assembling the three into a new meaning or leaving the mortal with the sense of foretelling."
+        },
+        {
+          "label": "C",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 90,
+          "note": "The reading arrives at the shape of interruption and incompletion as a single foretold condition, and the mortal recognizes in it something already known to be true."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "B": {
+          "chair": "Empowered",
+          "name": "Seren"
+        },
+        "C": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

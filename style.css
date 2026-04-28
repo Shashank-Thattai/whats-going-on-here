@@ -49,6 +49,35 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.street-sediment {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  stroke: var(--ink);
+  stroke-width: 1px;
+  fill: none;
+}
+.street-sediment.visible-1 {
+  opacity: 0.12;
+}
+.street-sediment.visible-2 {
+  opacity: 0.25;
+}
+.street-sediment.visible-3 {
+  opacity: 0.4;
+}
+.street-sediment.visible-4-plus {
+  opacity: 0.55;
+}
+.street-sediment.deepening {
+  animation: sediment-deepen 400ms ease-out;
+}
+@keyframes sediment-deepen {
+  0% { opacity: 0.12; stroke-width: 1px; }
+  100% { opacity: 0.4; stroke-width: 1.5px; }
+}
+
 .audio-context-indicator {
   position: fixed;
   bottom: 1rem;
