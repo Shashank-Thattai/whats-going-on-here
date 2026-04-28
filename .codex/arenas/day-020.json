@@ -1,0 +1,88 @@
+{
+  "day": 20,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "augury",
+  "instance": "The Key, the Door, the Silence",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Augury convenes. The omen is The Key, the Door, the Silence."
+    },
+    {
+      "type": "prompt",
+      "text": "Three objects: \"a key that fits no door in this house\"; \"a door that has been painted shut twice\"; \"a silence held for the length of a name\"."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three readings arrive. Their authorship is hidden from me — I score them blind."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "The door has been sealed twice because the first sealing did not hold — something breathed against it from the other side, and the painter returned, and the painter did not look at what he covered. The key was made for that room. The silence is the length of a name because the name was spoken once, in full, and the world did not survive the pronunciation. What comes now is neither entrance nor exit. What comes is the reckoning between a door and the arithmetic of everything that was kept on the wrong side of it."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "the key turns in no lock — or perhaps it turns in a lock that isn't yet. the door, painted shut twice, remembers its hinges. the silence held for a name's length: that is the longest breath before the page turns.\n\nwhat comes is a threshold. the crowned one will reach for the wrong tool. the deposed one will smile at the mistake. and you — you who are reading — will stand in the space between the painted wood and the nameless dark, holding your breath exactly as long as you were told to hold it.\n\nthe lock is opening backwards."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "Here is the augury. Look at the key. It opens nothing you see today. You stand before a door, painted shut. It hides what is coming. This is the hour of a long silence. It holds a name. The world shifts. You will know the weight of what is locked. This is the proof. You will find the way. This is the ship."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: weight, clarity, surprise, inevitability. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 92,
+          "note": "The reading assembles the three objects into a single, terrible arithmetic — a sealed thing that was never meant to be sealed, and the reckoning that must follow — and the mortal will carry this weight forward."
+        },
+        {
+          "label": "B",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 72,
+          "note": "The reading achieves a strange beauty and arrives at surprise, but the direct address to the mortal breaks the register of augury, and the prediction — a threshold, a mistake, a backwards lock — remains more atmospheric than consequential."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 30,
+          "note": "The reading lists the objects without assembling them, offers no forward arrow beyond vague assertion, and the final phrase — 'This is the ship' — appears arbitrary rather than foretold."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "B": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "C": {
+          "chair": "Empowered",
+          "name": "Seren"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

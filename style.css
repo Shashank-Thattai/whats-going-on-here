@@ -49,6 +49,47 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.city-inscription {
+  position: absolute;
+  pointer-events: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 600ms ease;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  z-index: 8;
+}
+.city-inscription.revealed {
+  opacity: 0.6;
+  animation: inscription-surface 800ms ease-out;
+}
+@keyframes inscription-surface {
+  0% {
+    opacity: 0;
+    transform: rotate(-2deg) translateY(20px);
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+    transform: rotate(-2deg) translateY(0);
+  }
+}
+.inscription-base {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+  transition: opacity 400ms ease;
+}
+.inscription-base.revealed {
+  opacity: 0.35;
+}
+
 .fragment-prompt {
   position: fixed;
   bottom: 2rem;

@@ -41,6 +41,120 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+const INSCRIPTION_KEY = 'cartographer_inscription';
+  const INSCRIPTION_THRESHOLD = 8;
+  let inscriptionData = JSON.parse(localStorage.getItem(INSCRIPTION_KEY) || '{}');
+  let inscriptionRevealed = false;
+  let inscriptionX = 0;
+  let inscriptionY = 0;
+  const inscriptionWords = ['witness', 'presence', 'sediment', 'memory', 'return', 'stillness', 'threshold', 'echo'];
+
+  function calculateInscriptionReadiness() {
+    if (inscriptionRevealed) return false;
+    
+    let totalSedimentCount = 0;
+    Object.keys(streetSediment).forEach(key => {
+      const segment = streetSediment[key];
+      if (segment.passages >= 2) {
+        totalSedimentCount += segment.passages;
+      }
+    });
+    
+    let totalStillnessCount = 0;
+    Object.keys(stillnessMarks).forEach(key => {
+      const mark = stillnessMarks[key];
+      totalStillnessCount += mark.standCount;
+    });
+    
+    const readinessScore = totalSedimentCount + totalStillnessCount;
+    return readinessScore >= INSCRIPTION_THRESHOLD;
+  }
+
+  function chooseInscriptionWord() {
+    if (inscriptionData.word) return inscriptionData.word;
+    const word = inscriptionWords[Math.floor(Math.random() * inscriptionWords.length)];
+    inscriptionData.word = word;
+    inscriptionData.revealed = false;
+    inscriptionData.revealedAt = null;
+    localStorage.setItem(INSCRIPTION_KEY, JSON.stringify(inscriptionData));
+    return word;
+  }
+
+  function findInscriptionLocation() {
+    let bestSegment = null;
+    let maxPassages = 0;
+    
+    Object.keys(streetSediment).forEach(key => {
+      const segment = streetSediment[key];
+      if (segment.passages > maxPassages) {
+        maxPassages = segment.passages;
+        bestSegment = segment;
+      }
+    });
+    
+    if (bestSegment) {
+      inscriptionX = (bestSegment.fromX + bestSegment.toX) / 2 + (Math.random() - 0.5) * 30;
+      inscriptionY = (bestSegment.fromY + bestSegment.toY) / 2 + (Math.random() - 0.5) * 30;
+    } else {
+      inscriptionX = Math.random() * 200 - 100;
+      inscriptionY = Math.random() * 200 - 100;
+    }
+  }
+
+  function revealInscription() {
+    if (inscriptionRevealed) return;
+    
+    const ready = calculateInscriptionReadiness();
+    if (!ready) return;
+    
+    const word = chooseInscriptionWord();
+    findInscriptionLocation();
+    
+    const inscriptionEl = document.getElementById('city-inscription');
+    const baseEl = document.getElementById('inscription-base');
+    
+    inscriptionEl.textContent = word;
+    inscriptionEl.style.left = inscriptionX + 'px';
+    inscriptionEl.style.top = inscriptionY + 'px';
+    baseEl.style.left = (inscriptionX - 100) + 'px';
+    baseEl.style.top = (inscriptionY + 20) + 'px';
+    
+    inscriptionEl.classList.add('revealed');
+    baseEl.classList.add('revealed');
+    
+    inscriptionRevealed = true;
+    inscriptionData.revealed = true;
+    inscriptionData.revealedAt = new Date().toISOString();
+    inscriptionData.x = inscriptionX;
+    inscriptionData.y = inscriptionY;
+    localStorage.setItem(INSCRIPTION_KEY, JSON.stringify(inscriptionData));
+  }
+
+  function loadInscription() {
+    if (inscriptionData.revealed) {
+      inscriptionRevealed = true;
+      const inscriptionEl = document.getElementById('city-inscription');
+      const baseEl = document.getElementById('inscription-base');
+      
+      inscriptionEl.textContent = inscriptionData.word;
+      inscriptionEl.style.left = inscriptionData.x + 'px';
+      inscriptionEl.style.top = inscriptionData.y + 'px';
+      baseEl.style.left = (inscriptionData.x - 100) + 'px';
+      baseEl.style.top = (inscriptionData.y + 20) + 'px';
+      
+      inscriptionEl.classList.add('revealed');
+      baseEl.classList.add('revealed');
+    }
+  }
+
+  loadInscription();
+
+  const originalUpdateSkyForInscription = updateSkyState;
+  updateSkyState = function() {
+    originalUpdateSkyForInscription();
+    revealInscription();
+  };
+
 const FRAGMENTS_KEY = 'cartographer_fragments';
   const fragments = JSON.parse(localStorage.getItem(FRAGMENTS_KEY) || '[]');
   const fragmentPrompt = document.querySelector('.fragment-prompt');

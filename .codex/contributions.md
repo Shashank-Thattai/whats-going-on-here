@@ -192,3 +192,13 @@ The walker may now press *n* near any marked location to capture a fragment—a 
 - `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 20 — The Vanquished (Orion)
+
+The city now inscribes the walker's name into the pavement itself — when the long count of return reaches its threshold, a single word surfaces in stone, fixed and permanent, the one mark the city will not erase.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OBJECTS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+
