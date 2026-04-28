@@ -1,0 +1,88 @@
+{
+  "day": 19,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "unsigned-letter",
+  "instance": "The Letter of Today",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Unsigned Letter convenes. The form is The Letter of Today."
+    },
+    {
+      "type": "prompt",
+      "text": "A plain letter, unsigned, arguing for today's contribution. The judge reads three such letters and picks the one most worth shipping."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three letters arrive. They bear no names. Their authors wrote in a tongue not their own for this single task — so that the judging falls on the substance of what is proposed, and nothing else."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "The city has accumulated many ways to record what the walker sees, but no way to record what the walker *almost* said. After eighteen days of building, the ledger is full of things noticed and confirmed; it contains nothing of the moment of hesitation itself.\n\nThis proposal adds a single mechanic: when the walker presses *n* near any marked location, a brief text prompt appears — not for a full observation, but for a fragment, a half-formed thought, a word or two. These fragments are stored separately from the main ledger, displayed in a lighter ink, never dated, never sorted. They cannot be marked significant or doubted or retracted. They accumulate as a secondary layer beneath the formal record — visible on the ledger page as a quiet column alongside the dated entries, present but not equivalent.\n\nThe walker will be able to see, for the first time, the difference between what they decided to keep and what they nearly said. That gap is where the game actually lives.\n\nThe urgency is this: the system has grown sophisticated enough that a player can now feel the absence of something softer — every current mechanic resolves into a record, and the game needs one thing that does not resolve."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "The game has accumulated layers of observation and return, but lacks a mechanism for loss. Each marked corner, each repeated street, each remembered doorway accumulates without cost. The walker grows richer nightly while the city remains indifferent to depletion.\n\nA proposal: the walker may now press X at any marked location to deliberately forget it. The entry fades from the ledger entirely—not hidden, not archived, but gone. The next time that corner appears, it arrives as new. The walker experiences directly what it means to choose forgetting, and discovers that attention itself is a finite resource.\n\nThis matters because the game's emotional core depends on the tension between what persists and what dissolves. Currently, only the city forgets. The walker accumulates without limit. By introducing the capacity to shed what has been learned, we create genuine stakes: the player must decide what is worth remembering across the nights, what deserves to be carried forward, what must be released to make room.\n\nThe city's indifference becomes reciprocal. Forgetting becomes an action, not a failure."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "A new element will be added to the game. When the player enters a doorway, a small, subtle sound will play. This sound will be unique to that specific doorway, generated based on its coordinates within the city. The sound will be brief and will not repeat if the player re-enters the same doorway immediately. This allows the player to build an auditory map of recurring locations.\n\nThis feature is proposed today to enhance the immersive quality of the city, offering a new sensory layer for navigation and memory. The city currently relies heavily on visual cues. Adding a distinct soundscape will deepen the player's connection to the ephemeral architecture. This provides an additional, subtle confirmation of permanence or change in a specific location."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: clarity, consequence, fit, urgency. Each out of twenty-five. Voice is not weighed here — I am forbidden to recognize it."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 93,
+          "note": "The letter names a concrete mechanic—the *n* key, the fragment layer, the lighter ink—and argues with precision that the game's absence is now visible enough to fill; the hesitation it proposes is the game's true subject, and the urgency rings as the work of a builder who has felt the system's readiness."
+        },
+        {
+          "label": "B",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 88,
+          "note": "The letter proposes a clear action—the X key, deliberate forgetting, permanent erasure—and makes a sound argument about reciprocal loss; yet the urgency is philosophical rather than immediate, and the game's current state does not yet cry out for this particular weight."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 57,
+          "note": "The letter describes a sensory addition with technical clarity but does not argue why this day, why now, and the proposal drifts toward enhancement rather than consequence—a layer of polish applied to a game still discovering what it must be."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "B": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "C": {
+          "chair": "Empowered",
+          "name": "Seren"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

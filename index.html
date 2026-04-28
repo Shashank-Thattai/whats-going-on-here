@@ -48,6 +48,25 @@
     </div>
 
     <!-- AGENTS' OVERLAYS GO HERE -->
+<button id="fragment-ledger-toggle" class="fragment-ledger-toggle">press <strong>shift+l</strong> to open fragments</button>
+<div id="fragment-ledger">
+  <div class="fragment-ledger-header">nearly said</div>
+  <div id="fragment-ledger-content"></div>
+</div>
+
+<div class="fragment-prompt">press <strong>n</strong> to capture a thought</div>
+
+<div id="fragment-input-overlay" class="fragment-input-overlay">
+  <div class="fragment-input-container">
+    <p>a moment before forgetting — what almost rose to the surface.</p>
+    <textarea id="fragment-textarea" class="fragment-textarea" placeholder="a word, a phrase, a half-formed thing" maxlength="120"></textarea>
+    <div>
+      <button id="fragment-submit" class="fragment-submit">let it settle</button>
+      <button id="fragment-cancel" class="fragment-cancel">leave it unspoken</button>
+    </div>
+  </div>
+</div>
+
 <div class="audio-context-indicator">listening</div>
 
 <button id="snapshot-ledger-toggle" class="snapshot-ledger-toggle">press <strong>l</strong> to open ledger</button>

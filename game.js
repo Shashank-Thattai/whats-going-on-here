@@ -41,6 +41,123 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+const FRAGMENTS_KEY = 'cartographer_fragments';
+  const fragments = JSON.parse(localStorage.getItem(FRAGMENTS_KEY) || '[]');
+  const fragmentPrompt = document.querySelector('.fragment-prompt');
+  const fragmentInputOverlay = document.getElementById('fragment-input-overlay');
+  const fragmentTextarea = document.getElementById('fragment-textarea');
+  const fragmentSubmit = document.getElementById('fragment-submit');
+  const fragmentCancel = document.getElementById('fragment-cancel');
+  const fragmentLedger = document.getElementById('fragment-ledger');
+  const fragmentLedgerToggle = document.getElementById('fragment-ledger-toggle');
+  const fragmentLedgerContent = document.getElementById('fragment-ledger-content');
+  let nearbyMarkedLocation = null;
+  let fragmentInputActive = false;
+
+  function checkNearbyMarkedLocations() {
+    nearbyMarkedLocation = null;
+    Object.keys(streetMarks).forEach(markId => {
+      const mark = streetMarks[markId];
+      const dx = x - mark.x;
+      const dy = y - mark.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 50) {
+        nearbyMarkedLocation = markId;
+      }
+    });
+    if (nearbyMarkedLocation !== null) {
+      fragmentPrompt.classList.add('visible');
+    } else {
+      fragmentPrompt.classList.remove('visible');
+    }
+  }
+
+  function openFragmentInput() {
+    if (nearbyMarkedLocation === null) return;
+    fragmentInputActive = true;
+    fragmentInputOverlay.classList.add('active');
+    fragmentTextarea.value = '';
+    fragmentTextarea.focus();
+  }
+
+  function closeFragmentInput() {
+    fragmentInputActive = false;
+    fragmentInputOverlay.classList.remove('active');
+    fragmentTextarea.value = '';
+  }
+
+  function saveFragment(text) {
+    if (text.trim().length === 0) {
+      closeFragmentInput();
+      return;
+    }
+    fragments.push({
+      text: text.trim(),
+      captured: new Date().toISOString(),
+      nearLocation: nearbyMarkedLocation
+    });
+    localStorage.setItem(FRAGMENTS_KEY, JSON.stringify(fragments));
+    renderFragmentLedger();
+    closeFragmentInput();
+  }
+
+  function renderFragmentLedger() {
+    fragmentLedgerContent.innerHTML = '';
+    fragments.forEach((fragment, idx) => {
+      const entryEl = document.createElement('div');
+      entryEl.className = 'fragment-entry';
+      const textEl = document.createElement('div');
+      textEl.className = 'fragment-entry-text';
+      textEl.textContent = fragment.text;
+      entryEl.appendChild(textEl);
+      fragmentLedgerContent.appendChild(entryEl);
+    });
+  }
+
+  window.addEventListener('keydown', (ev) => {
+    if ((ev.key === 'n' || ev.key === 'N') && nightActive && !endScreen.classList.contains('active') && !fragmentInputActive) {
+      if (nearbyMarkedLocation !== null) {
+        openFragmentInput();
+        ev.preventDefault();
+      }
+    }
+    if ((ev.key === 'L' || ev.key === 'l') && ev.shiftKey && !endScreen.classList.contains('active')) {
+      fragmentLedger.classList.toggle('open');
+      ev.preventDefault();
+    }
+  });
+
+  fragmentSubmit.addEventListener('click', () => {
+    saveFragment(fragmentTextarea.value);
+  });
+
+  fragmentCancel.addEventListener('click', () => {
+    closeFragmentInput();
+  });
+
+  fragmentTextarea.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && ev.ctrlKey) {
+      saveFragment(fragmentTextarea.value);
+      ev.preventDefault();
+    }
+    if (ev.key === 'Escape') {
+      closeFragmentInput();
+      ev.preventDefault();
+    }
+  });
+
+  fragmentLedgerToggle.addEventListener('click', () => {
+    fragmentLedger.classList.toggle('open');
+  });
+
+  const originalPlaceForFragments = place;
+  place = function() {
+    originalPlaceForFragments();
+    checkNearbyMarkedLocations();
+  };
+
+  renderFragmentLedger();
+
 const STILLNESS_MARKS_KEY = 'cartographer_stillness_marks';
   const stillnessMarks = JSON.parse(localStorage.getItem(STILLNESS_MARKS_KEY) || '{}');
   let lastStillnessCheckTime = Date.now();

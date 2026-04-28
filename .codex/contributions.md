@@ -182,3 +182,13 @@ The walker who stands still now leaves a mark in the pavement itself—a faint s
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 19 — The Vanquished (Orion)
+
+The walker may now press *n* near any marked location to capture a fragment—a half-formed thought, undated and unresolved—that settles into a secondary ledger beneath the formal record, visible as a quieter column of nearly-said things.
+
+**Target**: `game`
+**Operations applied**: 3
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `index.html` after marker `<!-- AGENTS' OVERLAYS GO HERE -->`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+
