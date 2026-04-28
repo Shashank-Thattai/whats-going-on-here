@@ -41,6 +41,152 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+const STREETS_LOCKED_KEY = 'cartographer_streets_locked';
+  const streetsLocked = JSON.parse(localStorage.getItem(STREETS_LOCKED_KEY) || '{}');
+  const STREET_LOCK_THRESHOLD = 3;
+  let lockedStreetCount = 0;
+  let renderedLockedStreets = {};
+  let renderedWildnessMarkers = {};
+
+  function getStreetSegmentKey(fromX, fromY, toX, toY) {
+    const roundX1 = Math.round(fromX / 20) * 20;
+    const roundY1 = Math.round(fromY / 20) * 20;
+    const roundX2 = Math.round(toX / 20) * 20;
+    const roundY2 = Math.round(toY / 20) * 20;
+    const minX = Math.min(roundX1, roundX2);
+    const maxX = Math.max(roundX1, roundX2);
+    const minY = Math.min(roundY1, roundY2);
+    const maxY = Math.max(roundY1, roundY2);
+    return minX + '_' + minY + '_' + maxX + '_' + maxY;
+  }
+
+  function recordStreetWalk(fromX, fromY, toX, toY) {
+    const key = getStreetSegmentKey(fromX, fromY, toX, toY);
+    if (!streetsLocked[key]) {
+      streetsLocked[key] = {
+        fromX: fromX,
+        fromY: fromY,
+        toX: toX,
+        toY: toY,
+        walkCount: 0,
+        locked: false,
+        lockedAt: null
+      };
+    }
+    streetsLocked[key].walkCount += 1;
+    
+    if (streetsLocked[key].walkCount === STREET_LOCK_THRESHOLD && !streetsLocked[key].locked) {
+      streetsLocked[key].locked = true;
+      streetsLocked[key].lockedAt = Date.now();
+      lockedStreetCount += 1;
+      localStorage.setItem(STREETS_LOCKED_KEY, JSON.stringify(streetsLocked));
+      renderLockedStreet(key, streetsLocked[key]);
+      generateWildnessAround(key, streetsLocked[key]);
+    } else {
+      localStorage.setItem(STREETS_LOCKED_KEY, JSON.stringify(streetsLocked));
+    }
+  }
+
+  function renderLockedStreet(key, segment) {
+    const lockedId = 'locked_' + key;
+    let lockedEl = document.getElementById(lockedId);
+    
+    if (!lockedEl) {
+      lockedEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      lockedEl.id = lockedId;
+      lockedEl.setAttribute('viewBox', '-60 -60 120 120');
+      lockedEl.setAttribute('width', '120');
+      lockedEl.setAttribute('height', '120');
+      lockedEl.classList.add('street-locked');
+      world.appendChild(lockedEl);
+    }
+    
+    const midX = (segment.fromX + segment.toX) / 2;
+    const midY = (segment.fromY + segment.toY) / 2;
+    lockedEl.style.left = (midX - 60) + 'px';
+    lockedEl.style.top = (midY - 60) + 'px';
+    
+    const dx = segment.toX - segment.fromX;
+    const dy = segment.toY - segment.fromY;
+    
+    let line = lockedEl.querySelector('line');
+    if (!line) {
+      line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      lockedEl.appendChild(line);
+    }
+    
+    line.setAttribute('x1', String(-dx / 2));
+    line.setAttribute('y1', String(-dy / 2));
+    line.setAttribute('x2', String(dx / 2));
+    line.setAttribute('y2', String(dy / 2));
+    line.setAttribute('stroke', 'currentColor');
+    
+    lockedEl.classList.add('visible');
+    renderedLockedStreets[lockedId] = true;
+  }
+
+  function generateWildnessAround(streetKey, segment) {
+    const midX = (segment.fromX + segment.toX) / 2;
+    const midY = (segment.fromY + segment.toY) / 2;
+    const wildnessCount = 2 + Math.floor(Math.random() * 2);
+    
+    for (let i = 0; i < wildnessCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 60 + Math.random() * 80;
+      const wildX = midX + Math.cos(angle) * distance;
+      const wildY = midY + Math.sin(angle) * distance;
+      
+      const wildId = 'wildness_' + streetKey + '_' + i;
+      const wildEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      wildEl.id = wildId;
+      wildEl.setAttribute('viewBox', '-30 -30 60 60');
+      wildEl.setAttribute('width', '60');
+      wildEl.setAttribute('height', '60');
+      wildEl.classList.add('wildness-marker');
+      wildEl.style.left = (wildX - 30) + 'px';
+      wildEl.style.top = (wildY - 30) + 'px';
+      
+      const pathType = Math.floor(Math.random() * 3);
+      let pathData = '';
+      if (pathType === 0) {
+        pathData = 'M -20 -20 Q 0 -25 20 -20 Q 25 0 20 20 Q 0 25 -20 20 Q -25 0 -20 -20';
+      } else if (pathType === 1) {
+        pathData = 'M -15 0 L 0 -18 L 15 0 L 0 18 Z';
+      } else {
+        pathData = 'M -20 -10 L -10 -20 L 10 -20 L 20 -10 L 20 10 L 10 20 L -10 20 L -20 10 Z';
+      }
+      
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', pathData);
+      path.setAttribute('stroke', 'currentColor');
+      path.setAttribute('fill', 'none');
+      wildEl.appendChild(path);
+      
+      world.appendChild(wildEl);
+      renderedWildnessMarkers[wildId] = true;
+    }
+  }
+
+  function loadLockedStreets() {
+    Object.keys(streetsLocked).forEach(key => {
+      const segment = streetsLocked[key];
+      if (segment.locked) {
+        renderLockedStreet(key, segment);
+        lockedStreetCount += 1;
+      }
+    });
+  }
+
+  loadLockedStreets();
+
+  const originalPlaceLockedStreets = place;
+  place = function() {
+    originalPlaceLockedStreets();
+    if (lastRecordedPos) {
+      recordStreetWalk(lastRecordedPos.x, lastRecordedPos.y, x, y);
+    }
+  };
+
   const STREET_SEDIMENT_KEY = 'cartographer_street_sediment';
   const streetSediment = JSON.parse(localStorage.getItem(STREET_SEDIMENT_KEY) || '{}');
   let lastSedimentSegmentKey = null;

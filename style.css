@@ -49,6 +49,53 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.street-locked {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  stroke: var(--ink);
+  stroke-width: 2px;
+  fill: none;
+}
+.street-locked.visible {
+  opacity: 0.8;
+  animation: lock-harden 400ms ease-out;
+}
+@keyframes lock-harden {
+  0% { stroke-width: 1px; opacity: 0.4; }
+  100% { stroke-width: 2.5px; opacity: 0.8; }
+}
+.locked-landmark {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0.7;
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(26, 26, 26, 0.3);
+}
+@media (prefers-color-scheme: dark) {
+  .locked-landmark {
+    box-shadow: 0 0 8px rgba(244, 241, 232, 0.2);
+  }
+}
+.wildness-marker {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.25;
+  stroke: var(--ink);
+  stroke-width: 1px;
+  fill: none;
+  animation: wildness-shimmer 2000ms ease-in-out infinite;
+}
+@keyframes wildness-shimmer {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.35; }
+}
+
 .street-sediment {
   position: absolute;
   pointer-events: none;

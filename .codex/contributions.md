@@ -155,3 +155,12 @@ The city now writes itself into the pavement — a street walked twice becomes f
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 16 — The Forgotten (Ash)
+
+a street walked three times now hardens into permanence — it locks itself into the city's geography, no longer shifting at dawn — but the cost is steep: the unmapped quarters grow strange, alleys branch in directions that weren't there before, and the walker discovers that obsession has teeth, that knowing something means losing something else.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+
