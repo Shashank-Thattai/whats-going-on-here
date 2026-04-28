@@ -41,6 +41,88 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+const UNSOLVABLE_DOORWAY_KEY = 'cartographer_unsolvable_doorway';
+  const unsolvableDoorway = JSON.parse(localStorage.getItem(UNSOLVABLE_DOORWAY_KEY) || '{}');
+  let doorwayStates = {};
+  const DOORWAY_CYCLE_STATES = ['unopenable', 'closed', 'self'];
+
+  function initializeUnsolvableDoorway() {
+    if (!unsolvableDoorway.id) {
+      unsolvableDoorway.id = 'unsolvable_0';
+      unsolvableDoorway.x = 80;
+      unsolvableDoorway.y = -20;
+      unsolvableDoorway.currentState = 0;
+      unsolvableDoorway.lastApproachTime = null;
+      unsolvableDoorway.approachCount = 0;
+      localStorage.setItem(UNSOLVABLE_DOORWAY_KEY, JSON.stringify(unsolvableDoorway));
+    }
+    doorwayStates[unsolvableDoorway.id] = unsolvableDoorway.currentState || 0;
+  }
+
+  function cycleUnsolvableDoorwayState() {
+    const currentState = doorwayStates[unsolvableDoorway.id] || 0;
+    const nextState = (currentState + 1) % DOORWAY_CYCLE_STATES.length;
+    doorwayStates[unsolvableDoorway.id] = nextState;
+    unsolvableDoorway.currentState = nextState;
+    unsolvableDoorway.approachCount = (unsolvableDoorway.approachCount || 0) + 1;
+    unsolvableDoorway.lastApproachTime = Date.now();
+    localStorage.setItem(UNSOLVABLE_DOORWAY_KEY, JSON.stringify(unsolvableDoorway));
+  }
+
+  function checkUnsolvableDoorway() {
+    const dx = x - unsolvableDoorway.x;
+    const dy = y - unsolvableDoorway.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const unsolvableEl = document.querySelector('[data-unsolvable-doorway="true"]');
+    
+    if (distance < 50) {
+      if (!unsolvableEl.classList.contains('unsolvable')) {
+        unsolvableEl.classList.add('unsolvable');
+        cycleUnsolvableDoorwayState();
+        unsolvableEl.classList.add('cycling');
+        setTimeout(() => unsolvableEl.classList.remove('cycling'), 800);
+      }
+    } else {
+      unsolvableEl.classList.remove('unsolvable', 'cycling');
+    }
+  }
+
+  function renderUnsolvableDoorway() {
+    let unsolvableEl = document.querySelector('[data-unsolvable-doorway="true"]');
+    if (!unsolvableEl) {
+      unsolvableEl = document.createElement('div');
+      unsolvableEl.className = 'doorway';
+      unsolvableEl.setAttribute('data-unsolvable-doorway', 'true');
+      unsolvableEl.style.left = unsolvableDoorway.x + 'px';
+      unsolvableEl.style.top = unsolvableDoorway.y + 'px';
+      world.appendChild(unsolvableEl);
+    }
+  }
+
+  initializeUnsolvableDoorway();
+  renderUnsolvableDoorway();
+
+  const originalPlaceUnsolvable = place;
+  place = function() {
+    originalPlaceUnsolvable();
+    checkUnsolvableDoorway();
+  };
+
+  window.addEventListener('keydown', (ev) => {
+    if ((ev.key === 'e' || ev.key === 'E') && nightActive && !endScreen.classList.contains('active')) {
+      const dx = x - unsolvableDoorway.x;
+      const dy = y - unsolvableDoorway.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 50) {
+        const unsolvableEl = document.querySelector('[data-unsolvable-doorway="true"]');
+        cycleUnsolvableDoorwayState();
+        unsolvableEl.classList.add('cycling');
+        setTimeout(() => unsolvableEl.classList.remove('cycling'), 800);
+        ev.preventDefault();
+      }
+    }
+  });
+
 const STREETS_LOCKED_KEY = 'cartographer_streets_locked';
   const streetsLocked = JSON.parse(localStorage.getItem(STREETS_LOCKED_KEY) || '{}');
   const STREET_LOCK_THRESHOLD = 3;

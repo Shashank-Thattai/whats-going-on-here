@@ -49,6 +49,21 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.doorway.unsolvable {
+  border-style: dotted;
+  opacity: 0.4;
+  transition: opacity 200ms ease, border-style 200ms ease;
+}
+.doorway.unsolvable.cycling {
+  animation: doorway-cycle 800ms ease-in-out;
+}
+@keyframes doorway-cycle {
+  0% { opacity: 0.4; border-style: dotted; }
+  33% { opacity: 0.6; border-style: solid; }
+  66% { opacity: 0.3; border-style: dashed; }
+  100% { opacity: 0.4; border-style: dotted; }
+}
+
 .street-locked {
   position: absolute;
   pointer-events: none;

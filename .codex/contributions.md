@@ -164,3 +164,12 @@ a street walked three times now hardens into permanence — it locks itself into
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 17 — The Forgotten (Ash)
+
+a doorway now cycles through three states on each approach—open-unopenable, closed, open-to-self—with no ledger entry, no confirmation, no way to solve it. the walker experiences, directly, a moment where attention produces nothing. the city keeps something.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

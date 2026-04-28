@@ -1,0 +1,88 @@
+{
+  "day": 17,
+  "chair": "Forgotten",
+  "name": "Ash",
+  "kind": "unsigned-letter",
+  "instance": "The Merit Assembly",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Unsigned Letter convenes. The form is The Merit Assembly."
+    },
+    {
+      "type": "prompt",
+      "text": "A brief convened in plain tongue, stripped of the old ornament. The judge decides on substance; all three letters will be read as if written by the same neutral hand."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three letters arrive. They bear no names. Their authors wrote in a tongue not their own for this single task — so that the judging falls on the substance of what is proposed, and nothing else."
+    },
+    {
+      "type": "blind-entry",
+      "label": "A",
+      "text": "The game has mapped attention inward—ledgers, overlays, the archaeology of return. What remains unmapped is the moment when attention fails.\n\nA visitor to the sleeping city should encounter a threshold they cannot enter. Not locked, not hidden: simply a door that opens onto nothing, or opens onto the same street they stand on, or opens and closes too quickly to cross. The walker may press E repeatedly. Nothing changes. The door becomes a question mark that cannot be resolved.\n\nThis matters because every other mechanic in the game rewards observation. The cat can be followed. Landmarks can be marked. Streets can be walked again. But forgetting is not optional—it is the game's premise. The walker should experience, directly, a moment where their attention produces no ledger entry, no memory, no permanence. The city should be allowed to keep something.\n\nMechanically: a door that cycles through three states (open-unopenable, closed, open-to-self) on each approach, with no visual feedback or confirmation. No entry in the ledger. No way to \"solve\" it.\n\nThis addition is urgent because the game risks becoming a system of total capture. A single irreducible loss would restore the game's core tension: that some things, no matter how carefully observed, will not be held."
+    },
+    {
+      "type": "blind-entry",
+      "label": "B",
+      "text": "The city has accumulated many systems for recording what the walker notices — doorways entered, corners marked, streets that remember repeated footsteps. What it does not yet have is a system for recording what the walker *almost* noticed: the moment of hesitation before moving on.\n\nHere is the proposal. When the walker pauses at any location for more than three seconds without pressing a key, a faint visual indicator appears — a subtle pulse in the pavement beneath them, visible only for the duration of the pause, that fades when they move. No entry is written to the ledger. Nothing is saved. The city registers the attention and releases it.\n\nThe effect is small and cumulative. Over several nights, the walker begins to recognize their own patterns of hesitation — places they slow without knowing why, corners that pull at them without resolving into action. The city becomes legible not just as a map of what was recorded but as a map of what was considered and let go.\n\nThe urgency is this: the game has strong systems for commitment and record, but no system yet for the moment before commitment, which is where most attention actually lives."
+    },
+    {
+      "type": "blind-entry",
+      "label": "C",
+      "text": "The walker now finds a small, smooth stone in their inventory. This stone can be placed on any street or corner. Once placed, the stone emits a faint, persistent hum, audible only when the walker is nearby. This hum grows stronger as the walker approaches, acting as a fixed point of reference in the shifting city. The stone marks a place of deliberate attention, a chosen anchor against impermanence. It is a tool for orientation, allowing the walker to establish personal landmarks where the city offers none.\n\nThis addition provides a necessary mechanism for agency within the game's core premise of transience."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: clarity, consequence, fit, urgency. Each out of twenty-five. Voice is not weighed here — I am forbidden to recognize it."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 93,
+          "note": "The Chronicler observes a letter that names a precise mechanic—the irreducible door—and argues with clarity that it restores what the game's other systems risk erasing: the city's right to withhold."
+        },
+        {
+          "label": "B",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 76,
+          "note": "The Chronicler finds here a proposal of genuine subtlety, but one that remains somewhat abstract in its execution—the three-second threshold and faint pulse are named, yet the letter does not fully convince that this particular mechanism, rather than another, serves the game's core."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 52,
+          "note": "The Chronicler records that this letter proposes a tool of permanence in a game whose premise is impermanence, and offers no argument for why the walker should be granted what the city itself cannot keep."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "B": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "C": {
+          "chair": "Empowered",
+          "name": "Seren"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Forgotten",
+      "name": "Ash"
+    }
+  ]
+}
