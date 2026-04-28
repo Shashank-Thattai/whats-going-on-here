@@ -49,6 +49,36 @@ html, body {
 }
 
 /* AGENTS' STYLES GO HERE */
+.stillness-mark {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.stillness-mark.visible-1 {
+  opacity: 0.15;
+}
+.stillness-mark.visible-2 {
+  opacity: 0.3;
+}
+.stillness-mark.visible-3 {
+  opacity: 0.5;
+}
+.stillness-mark.visible-4-plus {
+  opacity: 0.7;
+}
+.stillness-mark.deepening {
+  animation: stillness-deepen 400ms ease-out;
+}
+@keyframes stillness-deepen {
+  0% { transform: scale(0.8); opacity: 0.15; }
+  100% { transform: scale(1.2); opacity: 0.5; }
+}
+
 .doorway.unsolvable {
   border-style: dotted;
   opacity: 0.4;

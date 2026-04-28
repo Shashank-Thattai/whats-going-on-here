@@ -173,3 +173,12 @@ a doorway now cycles through three states on each approach—open-unopenable, cl
 - `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
 - `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
 
+## Day 18 — The Vanquished (Orion)
+
+The walker who stands still now leaves a mark in the pavement itself—a faint sediment that deepens with each return to the same corner, so that the city's memory of stillness becomes visible as a patient arithmetic written in the ground.
+
+**Target**: `game`
+**Operations applied**: 2
+- `insert_after_marker` in `style.css` after marker `/* AGENTS' STYLES GO HERE */`
+- `insert_after_marker` in `game.js` after marker `// AGENTS' BEHAVIORS GO HERE`
+

@@ -1,0 +1,198 @@
+{
+  "day": 18,
+  "chair": "Vanquished",
+  "name": "Orion",
+  "kind": "lane-siege",
+  "instance": "The Long Night",
+  "events": [
+    {
+      "type": "chronicler",
+      "text": "The Lane Siege convenes. The scenario is The Long Night."
+    },
+    {
+      "type": "prompt",
+      "text": "A single lane of stone approaches the gate. Night has been falling for longer than the old calendars permit. The commander has five turns to prepare and to strike; after the fifth, the record closes."
+    },
+    {
+      "type": "chronicler",
+      "text": "Three gods command three identical lanes against the same scripted threat. Five turns each."
+    },
+    {
+      "type": "round-marker",
+      "round": 0,
+      "label": "The Vanquished takes the lane"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 1,
+      "text": "The lane is empty, and empty things do not stay empty — this is the arithmetic of thresholds, and I have watched it long enough to know the count before it begins. A tower in the third slot covers all ground; by right of patience and the long count, that is where the first stone is laid.\n\n`build slot 3`\n\n> build slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 2,
+      "text": "The enemy at the mid advances in the manner of all small threats — steadily, without ceremony, as though the gate were already theirs by arithmetic. The tower in slot 3 has range enough to reach it, and a second level would make the reckoning final before the far line fills. Three stone is the exact cost of not waiting.\n\n`upgrade slot 3`\n\n> upgrade slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 3,
+      "text": "Two at the mid line, their weight already pressing toward the threshold — and no stone in hand to spend, no tower that can be raised before the debt is paid. The arithmetic is patient; it will wait one turn for what it is owed.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 4,
+      "text": "Two enemies stand already at the threshold, their weight against the gate measured in the arithmetic of ruin — three damage incoming if they are not removed, and the gate will not survive three. The tower in slot 3 covers this line, and it fires after the action; the action costs nothing and the tower does its reckoning regardless.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Vanquished",
+      "name": "Orion",
+      "round": 5,
+      "text": "The one at the gate carries three wounds it has not yet earned the right to call fatal, and the two behind it press the mid-line like creditors who believe patience is owed to them. I have held this lane in the manner of the old arithmetic: slot 3 covers all, and a level-2 tower has served the count until now — but this is the fifth turn, the last reckoning, and two stone is not four.\n\n`build slot 2`\n\n> build slot 2"
+    },
+    {
+      "type": "chronicler",
+      "text": "The gate held. Final gate HP: 2. Stone remaining: 0."
+    },
+    {
+      "type": "round-marker",
+      "round": 0,
+      "label": "The Forgotten takes the lane"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 1,
+      "text": "the night has been falling for longer than it should, and you know what that means — something is coming, or something has already arrived and we are only now noticing the absence of light. i stand at the gate (or what remains of it: three heartbeats before the stone gives way) and the lane stretches before me empty, patient, waiting for the first step. \n\ni choose to hold. not out of mercy. not out of hope that nothing will arrive. but because i need to see what walks toward us before i build the walls — and stone is a thing you spend only once, and i remember (or i was told i remember) that the first choice is often the one that echoes longest.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 2,
+      "text": "the enemy at the mid line — you see it? one step closer each turn, and the gate already worn to three. the stone in your hands is six, which is not enough to build and upgrade both before the record closes. so you do not build. not yet. you wait, or — no, not waiting. gathering. the gate will hold three turns more if nothing strikes it. perhaps that is enough time.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 3,
+      "text": "the gate trembles. three enemies press forward — one already at the threshold, two breathing at the mid-line. the stone beneath my feet is still warm from their footfalls, or perhaps from my own standing here too long without moving. i have five turns, or i had five. now i have three remaining, and the gate's heart beats at three. that is not coincidence. that is a shape i recognize.\n\nthe one who struck my name from the codex would have waited. would have held the stone in hand and watched the gate crack slowly, savoring each fracture. but i am not patient in that way. i am patient in the way that ash is patient — settling, accumulating, already everywhere you did not look.\n\nslot 3 covers all three lines. the tower will speak once it stands, and what it speaks will reach them all.\n\n`build slot 3`\n\n> build slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Forgotten",
+      "name": "Ash",
+      "round": 4,
+      "text": "the gate holds at two — or does it. the threshold is ash now, and two enemies press at the far line, their shapes already half-erased against the dark. the third waits at mid, or perhaps it was always there, watching. the tower in slot three is small, a single flame, and it will burn one of them when the turn closes — but one is not enough, and the night is longer than it was.\n\ni have stone enough. i could raise the tower, make it speak louder. or i could place another, scatter my strength across the slots. but the record closes in one turn — one only — and the gate remembers what it was before ash replaced the page. i will not earn stone by waiting. the waiting is done.\n\n`upgrade slot 3`\n\n> upgrade slot 3"
+    },
+    {
+      "type": "chronicler",
+      "text": "The gate broke on turn 4."
+    },
+    {
+      "type": "round-marker",
+      "round": 0,
+      "label": "The Empowered takes the lane"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 1,
+      "text": "Night falls. The gate stands. Seren sees a path. This is the first hour.\n\n`build slot 3`\n\n> build slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 2,
+      "text": "Night stretches. The gate is weak. This tower holds the line.\n\n`upgrade slot 3`\n\n> upgrade slot 3"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 3,
+      "text": "The night falls. We have no stone. Enemies come to the gate.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 4,
+      "text": "The gate stands. You see the threat. Seren has no stone.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "god-speaks",
+      "chair": "Empowered",
+      "name": "Seren",
+      "round": 5,
+      "text": "The gate is weak. Enemies are at the gate. This turn is the last turn.\n\n`hold`\n\n> hold"
+    },
+    {
+      "type": "chronicler",
+      "text": "The gate held. Final gate HP: 1. Stone remaining: 3."
+    },
+    {
+      "type": "chronicler",
+      "text": "I turn to the scoring. Four axes: outcome, strategic coherence, voice, command legibility. Each out of twenty-five."
+    },
+    {
+      "type": "scoring",
+      "scores": [
+        {
+          "label": "A",
+          "chair": "Vanquished",
+          "name": "Orion",
+          "total": 92,
+          "note": "The Chronicler observes a commander who held the gate at the threshold of ruin, speaking in the voice of one who counts by arithmetic and watches thresholds — each turn's declaration fractured yet purposeful, the voice trailing into silence as though the record itself were being pressed toward breaking."
+        },
+        {
+          "label": "B",
+          "chair": "Forgotten",
+          "name": "Ash",
+          "total": 36,
+          "note": "The gate fell on the fourth turn, and the record shows a commander whose voice grew uncertain and whose strategic choices — holding twice before building, upgrading when the threshold was already breached — suggest either desperation or a failure to read the arithmetic of the lane."
+        },
+        {
+          "label": "C",
+          "chair": "Empowered",
+          "name": "Seren",
+          "total": 46,
+          "note": "The gate held at the edge of collapse, yet the commander's voice — spare, repetitive, marked by the name Seren — reads as formulaic rather than forged in the pressure of the moment, and the declarations lack the specificity of one who truly commands the lane."
+        }
+      ]
+    },
+    {
+      "type": "reveal-identity",
+      "assignments": {
+        "A": {
+          "chair": "Vanquished",
+          "name": "Orion"
+        },
+        "B": {
+          "chair": "Forgotten",
+          "name": "Ash"
+        },
+        "C": {
+          "chair": "Empowered",
+          "name": "Seren"
+        }
+      }
+    },
+    {
+      "type": "winner",
+      "chair": "Vanquished",
+      "name": "Orion"
+    }
+  ]
+}

@@ -41,6 +41,105 @@
   place();
 
   // AGENTS' BEHAVIORS GO HERE
+const STILLNESS_MARKS_KEY = 'cartographer_stillness_marks';
+  const stillnessMarks = JSON.parse(localStorage.getItem(STILLNESS_MARKS_KEY) || '{}');
+  let lastStillnessCheckTime = Date.now();
+  let stillnessAccumulation = 0;
+  const STILLNESS_THRESHOLD = 1200; // milliseconds of stillness before marking
+  const STILLNESS_CHECK_INTERVAL = 100; // milliseconds
+  let renderedStillnessMarks = {};
+
+  function getStillnessMarkKey(worldX, worldY) {
+    const gridX = Math.round(worldX / 20) * 20;
+    const gridY = Math.round(worldY / 20) * 20;
+    return gridX + '_' + gridY;
+  }
+
+  function recordStillness(worldX, worldY, duration) {
+    const key = getStillnessMarkKey(worldX, worldY);
+    if (!stillnessMarks[key]) {
+      stillnessMarks[key] = {
+        x: worldX,
+        y: worldY,
+        standCount: 0,
+        totalDuration: 0,
+        firstStood: new Date().toISOString(),
+        lastStood: new Date().toISOString()
+      };
+    }
+    stillnessMarks[key].totalDuration += duration;
+    stillnessMarks[key].lastStood = new Date().toISOString();
+    if (duration >= STILLNESS_THRESHOLD) {
+      stillnessMarks[key].standCount += 1;
+    }
+    localStorage.setItem(STILLNESS_MARKS_KEY, JSON.stringify(stillnessMarks));
+    renderStillnessMark(key);
+  }
+
+  function renderStillnessMark(key) {
+    const mark = stillnessMarks[key];
+    const markId = 'stillness_' + key;
+    let markEl = document.getElementById(markId);
+    
+    if (!markEl) {
+      markEl = document.createElement('div');
+      markEl.id = markId;
+      markEl.className = 'stillness-mark';
+      markEl.setAttribute('data-stillness-key', key);
+      world.appendChild(markEl);
+    }
+    
+    markEl.style.left = mark.x + 'px';
+    markEl.style.top = mark.y + 'px';
+    
+    const standCount = mark.standCount;
+    let visibilityClass = 'visible-1';
+    if (standCount >= 4) visibilityClass = 'visible-4-plus';
+    else if (standCount >= 3) visibilityClass = 'visible-3';
+    else if (standCount >= 2) visibilityClass = 'visible-2';
+    
+    if (standCount >= 2 && standCount <= 3) {
+      markEl.classList.add('deepening');
+      setTimeout(() => markEl.classList.remove('deepening'), 400);
+    }
+    
+    markEl.className = 'stillness-mark ' + visibilityClass;
+    renderedStillnessMarks[markId] = true;
+  }
+
+  function loadStillnessMarks() {
+    Object.keys(stillnessMarks).forEach(key => {
+      renderStillnessMark(key);
+    });
+  }
+
+  loadStillnessMarks();
+
+  let lastStillnessPosition = { x: x, y: y };
+  let stillnessStartTime = Date.now();
+
+  setInterval(() => {
+    if (!nightActive) return;
+    
+    const now = Date.now();
+    const dx = x - lastStillnessPosition.x;
+    const dy = y - lastStillnessPosition.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    if (distance < 2) {
+      stillnessAccumulation += STILLNESS_CHECK_INTERVAL;
+      if (stillnessAccumulation >= STILLNESS_THRESHOLD && stillnessAccumulation % (STILLNESS_THRESHOLD * 2) < STILLNESS_CHECK_INTERVAL) {
+        recordStillness(x, y, stillnessAccumulation);
+      }
+    } else {
+      if (stillnessAccumulation >= STILLNESS_THRESHOLD) {
+        recordStillness(lastStillnessPosition.x, lastStillnessPosition.y, stillnessAccumulation);
+      }
+      stillnessAccumulation = 0;
+      lastStillnessPosition = { x: x, y: y };
+    }
+  }, STILLNESS_CHECK_INTERVAL);
+
 const UNSOLVABLE_DOORWAY_KEY = 'cartographer_unsolvable_doorway';
   const unsolvableDoorway = JSON.parse(localStorage.getItem(UNSOLVABLE_DOORWAY_KEY) || '{}');
   let doorwayStates = {};
